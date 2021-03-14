@@ -1,0 +1,350 @@
+<%- include('header', { title: 'Chi tiết đơn đặt hàng' , title_c: 'Đơn hàng chi tiết' }); -%>
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+        <!-- RIBBON -->
+        <div id="ribbon">
+
+            <span class="ribbon-button-alignment">
+                <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip"
+                    data-placement="bottom"
+                    data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings."
+                    data-html="true">
+                    <i class="fa fa-refresh"></i>
+                </span>
+            </span>
+
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li>Home</li>
+                <li>Kho hàng</li>
+                <li>Quản lý đơn hàng</li>
+                <li>Chi tiết</li>
+            </ol>
+            <!-- end breadcrumb -->
+
+        </div>
+        <!-- END RIBBON -->
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+
+            <!-- widget grid -->
+            <section id="widget-grid" class="">
+
+                <!-- row -->
+                <div class="row">
+
+                    <!-- NEW WIDGET START -->
+                    <article class="col-sm-12 col-md-12">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false"
+                            data-widget-custombutton="false" role="widget">
+
+                            <header role="heading">
+                                <div class="jarviswidget-ctrls" role="menu"> <a href="javascript:void(0);"
+                                        class="button-icon jarviswidget-toggle-btn" rel="tooltip" title=""
+                                        data-placement="bottom" data-original-title="Collapse"><i
+                                            class="fa fa-minus "></i></a> <a href="javascript:void(0);"
+                                        class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title=""
+                                        data-placement="bottom" data-original-title="Fullscreen"><i
+                                            class="fa fa-expand "></i></a>
+                                </div>
+                                <div class="widget-toolbar" role="menu"><a data-toggle="dropdown"
+                                        class="dropdown-toggle color-box selector" href="javascript:void(0);"></a>
+                                    <ul class="dropdown-menu arrow-box-up-right color-select pull-right">
+                                        <li><span class="bg-color-green" data-widget-setstyle="jarviswidget-color-green"
+                                                rel="tooltip" data-placement="left"
+                                                data-original-title="Green Grass"></span></li>
+                                        <li><span class="bg-color-greenDark"
+                                                data-widget-setstyle="jarviswidget-color-greenDark" rel="tooltip"
+                                                data-placement="top" data-original-title="Dark Green"></span></li>
+                                        <li><span class="bg-color-greenLight"
+                                                data-widget-setstyle="jarviswidget-color-greenLight" rel="tooltip"
+                                                data-placement="top" data-original-title="Light Green"></span></li>
+                                        <li><span class="bg-color-purple"
+                                                data-widget-setstyle="jarviswidget-color-purple" rel="tooltip"
+                                                data-placement="top" data-original-title="Purple"></span></li>
+                                        <li><span class="bg-color-magenta"
+                                                data-widget-setstyle="jarviswidget-color-magenta" rel="tooltip"
+                                                data-placement="top" data-original-title="Magenta"></span></li>
+                                        <li><span class="bg-color-pink" data-widget-setstyle="jarviswidget-color-pink"
+                                                rel="tooltip" data-placement="right" data-original-title="Pink"></span>
+                                        </li>
+                                        <li><span class="bg-color-pinkDark"
+                                                data-widget-setstyle="jarviswidget-color-pinkDark" rel="tooltip"
+                                                data-placement="left" data-original-title="Fade Pink"></span></li>
+                                        <li><span class="bg-color-blueLight"
+                                                data-widget-setstyle="jarviswidget-color-blueLight" rel="tooltip"
+                                                data-placement="top" data-original-title="Light Blue"></span></li>
+                                        <li><span class="bg-color-teal" data-widget-setstyle="jarviswidget-color-teal"
+                                                rel="tooltip" data-placement="top" data-original-title="Teal"></span>
+                                        </li>
+                                        <li><span class="bg-color-blue" data-widget-setstyle="jarviswidget-color-blue"
+                                                rel="tooltip" data-placement="top"
+                                                data-original-title="Ocean Blue"></span></li>
+                                        <li><span class="bg-color-blueDark"
+                                                data-widget-setstyle="jarviswidget-color-blueDark" rel="tooltip"
+                                                data-placement="top" data-original-title="Night Sky"></span></li>
+                                        <li><span class="bg-color-darken"
+                                                data-widget-setstyle="jarviswidget-color-darken" rel="tooltip"
+                                                data-placement="right" data-original-title="Night"></span></li>
+                                        <li><span class="bg-color-yellow"
+                                                data-widget-setstyle="jarviswidget-color-yellow" rel="tooltip"
+                                                data-placement="left" data-original-title="Day Light"></span></li>
+                                        <li><span class="bg-color-orange"
+                                                data-widget-setstyle="jarviswidget-color-orange" rel="tooltip"
+                                                data-placement="bottom" data-original-title="Orange"></span></li>
+                                        <li><span class="bg-color-orangeDark"
+                                                data-widget-setstyle="jarviswidget-color-orangeDark" rel="tooltip"
+                                                data-placement="bottom" data-original-title="Dark Orange"></span></li>
+                                        <li><span class="bg-color-red" data-widget-setstyle="jarviswidget-color-red"
+                                                rel="tooltip" data-placement="bottom"
+                                                data-original-title="Red Rose"></span></li>
+                                        <li><span class="bg-color-redLight"
+                                                data-widget-setstyle="jarviswidget-color-redLight" rel="tooltip"
+                                                data-placement="bottom" data-original-title="Light Red"></span></li>
+                                        <li><span class="bg-color-white" data-widget-setstyle="jarviswidget-color-white"
+                                                rel="tooltip" data-placement="right"
+                                                data-original-title="Purity"></span></li>
+                                        <li><a href="javascript:void(0);" class="jarviswidget-remove-colors"
+                                                data-widget-setstyle="" rel="tooltip" data-placement="bottom"
+                                                data-original-title="Reset widget color to default">Remove</a></li>
+                                    </ul>
+                                </div>
+                                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                <h2>Chi tiết đơn đặt hàng - ID: #<%- order.id %> 
+                                    <% if (order.isShip) { %>
+                                        <td class="text-center"><div class="label label-info">Giao hàng</div></td>
+                                    <% } %>
+                                    
+                                    <% if(order.status == 0) { %>
+                                        <td class="text-center"><div class="label label-warning">Chưa xác nhận</div></td>
+                                    <% } else if(order.status == -1) { %>
+                                        <td class="text-center"><div class="label label-default">Thất bại</div></td>
+                                    <% } else if(order.status == 1) { %>
+                                        <td class="text-center"><div class="label label-success">Thành công</div></td>
+                                    <% } else if(order.status == 2) { %>
+                                        <td class="text-center"><div class="label label-info">Chờ thanh toán</div></td>
+                                    <% } else if(order.status == 3) { %>
+                                        <td class="text-center"><div class="label label-info">Đang giao hàng</div></td>
+                                    <% } %>
+
+                                    <% if (order.isDeleted) { %>
+                                        <td class="text-center"><div class="label label-danger">Đã hủy</div></td>
+                                    <% } %>
+                                </h2>
+
+                                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                            </header>
+
+                            <!-- widget div-->
+                            <div role="content">
+
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+
+                                    <form id="checkout-form" method="POST" class="smart-form" novalidate="novalidate">
+
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-6">
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-user"></i>
+                                                        <input class="icon-input" type="text" name="fullName"
+                                                            placeholder="Tên khách hàng" value="<%= order.customer_name %>" readonly>
+                                                        <% if (!order.isDone){ %><i class="edit-link">Sửa</i><% }; %>
+                                                    </label>
+                                                </section>
+                                                <section class="col col-6">
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-mobile"></i>
+                                                        <input type="tel" name="phone" placeholder="Số điện thoại"
+                                                            value="<%= order.customer_phone %>" readonly>
+                                                        <% if (!order.isDone){ %><i class="edit-link">Sửa</i><% }; %>
+                                                    </label>
+                                                </section>
+                                            </div>
+
+                                            <div class="row">
+                                                <section class="col col-6">
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-envelope-o"></i>
+                                                        <input type="email" name="email" placeholder="E-mail" 
+                                                            value="<%= order.customer_email %>" readonly>
+                                                        <% if (!order.isDone){ %><i class="edit-link">Sửa</i><% }; %>
+                                                    </label>
+                                                </section>
+                                                <section class="col col-6">
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-map-marker"></i>
+                                                        <input type="text" name="address" value="<%= order.address %>"
+                                                            placeholder="Địa chỉ giao nhận" readonly>
+                                                        <% if (!order.isDone){ %><i class="edit-link">Sửa</i><% }; %>
+                                                    </label>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+
+                                        <header>
+                                            Sản phẩm đã đặt
+                                        </header>
+                                        <fieldset>
+                                            <section>
+                                                <div class="custom-scroll table-responsive"
+                                                    style="max-height:250px; overflow-y:scroll;">
+
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tên sản phẩm</i></th>
+                                                                <th>Màu sắc<i class="text-danger">!</i></th>
+                                                                <th>Số lượng</th>
+                                                                <th>Thành tiền</th>
+                                                                <th>Số lượng còn</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <% order.extend_orders.forEach(function(extend_order, index){ %>
+                                                                <tr>
+                                                                    <td><%= extend_order.extend_product.product.name %></td>
+                                                                    <td><%= extend_order.extend_product.color %></td>
+                                                                    <td><%= extend_order.amount %></td>
+                                                                    <td><%= extend_order.price.toLocaleString('it-IT') %> đ</td>
+                                                                    <td><%= extend_order.extend_product.amount %></td>
+                                                                </tr>
+                                                            <% }); %>
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </section>
+                                            
+                                            <section>
+                                                <label class="textarea">
+                                                    <textarea rows="2" name="info" placeholder="Lưu ý của khách hàng" 
+                                                        readonly><%= order.note %></textarea>
+                                                    <% if (!order.isDone){ %><i class="edit-link">Sửa</i><% }; %>
+                                                </label>
+                                            </section>
+
+                                            <div class="row">
+
+                                                <label class="label col">Ngày tạo:</label>
+                                                <section class="col col-3">
+                                                    <label class="input">
+                                                        <input type="text" name="createdAt" placeholder="Ngày tạo" 
+                                                            value="<%= moment(order.createdAt).format('h:mm:ss a, DD/MM/YYYY') %>" readonly>
+                                                    </label>
+                                                </section>
+
+                                                <label class="label col">Ngày sửa:</label>
+                                                <section class="col col-3">
+                                                    <label class="input">
+                                                        <input type="text" name="updatedAt" placeholder="Ngày sửa" 
+                                                            value="<%= moment(order.updatedAt).format('h:mm:ss a, DD/MM/YYYY') %>" readonly>
+                                                    </label>
+                                                </section>
+                                            
+                                                <div class="float-right">
+                                                    <label class="label col">Phí giao hàng:</label>
+                                                    <section class="col col-7">
+                                                        <label class="input">
+                                                            <input type="text" name="fee_ship" placeholder="Phí giao hàng" 
+                                                               value="<%= order.fee_ship.toLocaleString('it-IT') %> đ" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="float-right">
+                                                    <label class="label col"><b>Tổng tiền:</b></label>
+                                                    <section class="col col-7">
+                                                        <label class="input">
+                                                            <input type="text" name="total_price" placeholder="Tổng tiền" 
+                                                                style="font-weight: bold;" readonly
+                                                                value="<%= order.total_price.toLocaleString('it-IT') %> đ">
+                                                        </label>
+                                                    </section>
+                                                </div>
+
+                                            </div>
+
+                                        </fieldset>
+
+                                        <% if (!order.isDone) { %>
+                                            <footer>
+                                                <button type="submit" name="save" style="float:none!important;" class="btn btn-primary">
+                                                    Lưu
+                                                </button>
+                                                <% if (order.status == 0) { %>
+                                                    <button type="submit" id="btnConfirm" name="confirm" class="btn btn-primary">
+                                                        Xác nhận
+                                                    </button>
+                                                <% } %>
+                                                <% if (order.isConfirmed) { %>
+                                                <button type="submit" name="paid" class="btn btn-labeled btn-success"
+                                                        onclick="if (confirm(&quot;B\u1ea1n c\u00f3 ch\u1eafc ch\u1eafn?&quot;)) { return true; } return false;">
+                                                        <span class="btn-label" style="padding:unset!important;background:none!important"><i class="glyphicon glyphicon-ok"></i></span>
+                                                        Đã thanh toán
+                                                </button>
+                                                <% } %>
+                                                <% if (!order.isDeleted) { %>
+                                                    <button type="submit" name="cancel" class="btn btn-labeled btn-danger"
+                                                        onclick="if (confirm(&quot;B\u1ea1n c\u00f3 ch\u1eafc ch\u1eafn mu\u1ed1n hủy?&quot;)) { return true; } return false;">
+                                                        <span class="btn-label" style="padding:unset!important;background:none!important"><i class="glyphicon glyphicon-trash"></i></span>
+                                                        Hủy đơn hàng
+                                                    </button>
+                                                <% } %>
+                                            </footer>
+                                        <% } %>
+                                    </form>
+
+                                </div>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                    <!-- WIDGET END -->
+
+                </div>
+                <!-- end row -->
+
+            </section>
+            <!-- end widget grid -->
+        </div>
+        <!-- END MAIN CONTENT -->
+
+    </div>
+    <!-- END MAIN PANEL -->
+    <script>
+        $('.edit-link').click(function () {
+            $(this).addClass('hidden');
+            var inputName = $(this).prev('input').attr('name');
+            var textareaName = $(this).prev('textarea').attr('name');
+            if (inputName) {
+                $('input[name ="' + inputName + '"]').attr('readonly', false);
+            } else {
+                $('textarea[name ="' + textareaName + '"]').attr('readonly', false);
+            }
+        });
+    </script>
+    <%- include('footer') -%>

@@ -1,0 +1,206 @@
+<%- include('header', { title: `Kết quả tìm kiếm ${q}`, titleSub : 'tim-kiem' }); -%>
+    <div class="container content-grid">
+        <div class="row">
+            <div class="span16 danh-muc-san-pham main-box-bg">
+                <div class="man-view_search_product">
+                    <h1>Tìm thấy <strong>
+                            <%= results.sanpham.length + results.phukien.length %> kết quả
+                        </strong> phù hợp với từ khóa "<%= q %>" <%= (results.length == 0) ? '' : 'trong đó có:' %></h1>
+                    <div class="row">
+                        <div class="span11 man-view_search_product">
+                            <% if (results.sanpham.length != 0) { %> 
+                            <div class="main_view_left">
+                                <h2>
+                                    <%= results.sanpham.length %> Sản phẩm
+                                </h2>
+                                <div class="grid_product_list_column clearfix " id="search_spmoi">
+                                    <% results.sanpham.forEach(function(product, index){ %>
+                                        <div class="product_list_column4">
+                                            <div class="grid-list__item">
+                                                <div class="grid-list__image">
+                                                    <% if (product.isHangCongTy) { %>
+                                                    <span class="label_cty">Công ty</span>
+                                                    <% }; %>
+                                                    <% if (product.isTraGop==true) { %>
+                                                    <label class="label_installment">Trả góp 0%</label>
+                                                    <% } else { %>
+                                                        <span class="sticker_mau_4">Siêu giảm giá</span>
+                                                    <% }; %>
+                                                    <a href="/<%= product.type %>/<%= product.path_url %>"
+                                                        title="<%= product.name %>">
+                                                        <img class="ty-pict cm-image" alt="<%= product.name %>"
+                                                            title="<%= product.name %>" width="180" height="180"
+                                                            src="/uploads/<%= product.extend_products[0].path_image %>">
+                                                    </a>
+                                                </div>
+                                                <div class="grid-list__item-name"> 
+                                                    <a href="/<%= product.type %>/<%= product.path_url %>"
+                                                        class="product-title"><%= product.name %>
+                                                    </a> 
+                                                </div>
+                                                <div class="grid-list__price">
+                                                    <span class="cm-reload-2520 price-update" id="price_update_2520">
+                                                        <span class="price" id="line_discounted_price_2520">
+                                                            <span id="sec_discounted_price_2520"
+                                                                class="price-num"><%= parseInt(product.price).toLocaleString('it-IT') %></span><span class="price-num"><sup style="font-size:smaller">₫</sup></span>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                    <% if (results.sanpham.length % 4 == 0) { %> 
+                                    <a class="more_load_page" href="/tim-kiem?q=<%= q %>">Xem thêm sản phẩm</a>
+                                    <% }; %> 
+                                </div>
+                            </div>
+                            <% }; %> 
+                            <% if (results.phukien.length != 0) { %> 
+                            <div class="main_view_left">
+                                <h2><%= results.phukien.length %> Phụ kiện</h2>
+                                <div class="grid_product_list_column clearfix">
+                                    <% results.phukien.forEach(function(product, index){ %>
+                                        <div class="product_list_column4">
+                                            <div class="grid-list__item">
+                                                <div class="grid-list__image">
+                                                    <% if (product.isHangCongTy) { %>
+                                                        <span class="label_cty">Công ty</span>
+                                                    <% }; %>
+                                                    <% if (product.isTraGop){ %>
+                                                        <label class="label_installment">Trả góp 0%</label>
+                                                    <% } else { %>
+                                                        <span class="sticker_mau_4">Siêu giảm giá</span>
+                                                    <% }; %>
+                                                    <a href="/<%= product.type %>/<%= product.path_url %>"
+                                                        title="<%= product.name %>">
+                                                        <img class="ty-pict cm-image" alt="<%= product.name %>"
+                                                            title="<%= product.name %>"
+                                                            src="/uploads/<%= product.extend_products[0].path_image %>" 
+                                                            width="180" height="135"> 
+                                                    </a>
+                                                </div>
+                                                <div class="grid-list__item-name"> 
+                                                    <a href="/<%= product.type %>/<%= product.path_url %>" class="product-title"><%= product.name %></a>
+                                                </div>
+                                                <div class="grid-list__price"> 
+                                                    <span class="cm-reload-149 price-update" id="price_update_149">
+                                                        <span class="price" id="line_discounted_price_149">
+                                                            <span id="sec_discounted_price_149" class="price-num"><%= parseInt(product.price).toLocaleString('it-IT') %></span><span class="price-num"><sup style="font-size:smaller">₫</sup></span>
+                                                        </span>
+                                                    </span> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                                <p class="center"> 
+                                    <a rel="nofollow" class="remo_xem" href="/phu-kien/?q=<%= q %>">
+                                        Tìm thấy <strong><%= results.phukien.length %></strong> phụ kiện liên quan
+                                    </a>
+                                </p>
+                            </div>
+                            <% }; %> 
+                        </div>
+                        <div class="span5 man-view_search_right">
+                            <div class="view-product_features view-product-question">
+                                <h2>Tin tức mới nhất</h2>
+                                <ul class="list-news-product mtop10">
+                                    <li> <a href="https://www.thegioididong.com/tin-tuc/xiaomi-mi-11-pin-5-000mah-tiep-tuc-lo-anh-tren-tay-nguoi-dung-1313257"
+                                            title="Xiaomi Mi 11 pin 5.000mAh tiếp tục lộ ảnh trên tay người dùng">
+                                            <img class=" pict" id="det_img_410367690"
+                                                src="https://cdn.tgdd.vn/Files/2020/12/12/1313257/mi-11_800x450-100x100.png"
+                                                width="100" height="56"
+                                                alt="Xiaomi Mi 11 pin 5.000mAh tiếp tục lộ ảnh trên tay người dùng"
+                                                title="Xiaomi Mi 11 pin 5.000mAh tiếp tục lộ ảnh trên tay người dùng">
+                                            <h3>Xiaomi Mi 11 pin 5.000mAh tiếp tục lộ ảnh trên tay người dùng
+                                            </h3> <span>Ngày: 01/21/2021</span>
+                                        </a> </li>
+                                    <li> <a href="https://www.thegioididong.com/tin-tuc/dien-thoai-may-tinh-bang-samsung-giam-gia-cuoi-tuan-1312864"
+                                            title="Giảm giá đến 5 triệu loạt smartphone, tablet Samsung bán chạy">
+                                            <img class=" pict" id="det_img_1110243488"
+                                                src="https://cdn.tgdd.vn/Files/2020/12/10/1312864/samsunggalaxya21s_800x450.jpg"
+                                                width="100" height="56"
+                                                alt="Giảm giá đến 5 triệu loạt smartphone, tablet Samsung bán chạy"
+                                                title="Giảm giá đến 5 triệu loạt smartphone, tablet Samsung bán chạy">
+                                            <h3>Giảm giá đến 5 triệu loạt smartphone, tablet Samsung bán chạy
+                                            </h3> <span>Ngày: 01/19/2021</span>
+                                        </a> </li>
+                                    <li> <a href="https://www.thegioididong.com/tin-tuc/uu-dai-hap-dan-khi-sam-laptop-dell-mua-giang-sinh-1312939"
+                                            title="Ưu đãi mùa giáng sinh: Sắm laptop Dell nhận ngay liền tay phần quà trị giá 200k">
+                                            <img class=" pict" id="det_img_352169609"
+                                                src="https://cdn.tgdd.vn/Files/2020/12/10/1312939/th_800x450.png"
+                                                width="100" height="56"
+                                                alt="Ưu đãi mùa giáng sinh: Sắm laptop Dell nhận ngay liền tay phần quà trị giá 200k"
+                                                title="Ưu đãi mùa giáng sinh: Sắm laptop Dell nhận ngay liền tay phần quà trị giá 200k">
+                                            <h3>Ưu đãi mùa giáng sinh: Sắm laptop Dell nhận ngay liền tay phần quà trị giá 200k
+                                            </h3> <span>Ngày: 01/19/2021</span>
+                                        </a> </li>
+                                </ul>
+                                <a rel="nofollow" class="remo_xem" href="/">Xem thêm tin tức</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    .man-view_search_product h1 {
+                        font-size: 18px;
+                        margin: 15px 0 10px;
+                        color: #999;
+                        font-weight: normal;
+                    }
+
+                    .man-view_search_product h1 strong {
+                        color: #000;
+                    }
+
+                    .grid-list__image img {
+                        max-height: 160px;
+                        width: auto;
+                    }
+
+                    .main_view_left {
+                        background: #f5f7fa;
+                        padding: 10px 10px 0;
+                        margin-top: 10px;
+                    }
+
+                    .main_view_left h2 {
+                        font-size: 16px;
+                        margin: 5px 0 15px;
+                    }
+
+                    .main_view_left .grid-list__item {
+                        border: 0;
+                        margin: 5px;
+                    }
+
+                    a.remo_xem {
+                        display: block;
+                        text-align: right;
+                        border-bottom: 1px solid #eaeaea;
+                        padding-bottom: 10px;
+                        color: #288ad6;
+                    }
+
+                    p a.remo_xem {
+                        display: inline-block;
+                        border: 1px solid #ddd;
+                        padding: 10px;
+                        color: #288ad6;
+                        border-radius: 4px;
+                        margin: 10px 0;
+                    }
+
+                    .man-view_search_right h2 {
+                        color: #666;
+                        padding-bottom: 10px;
+                    }
+
+                    .man-view_search_right .template-links-thumb {
+                        margin-left: 0;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+<%- include('footer') -%>

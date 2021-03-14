@@ -1,0 +1,21 @@
+<%- include('header', { title: 'Đặt hàng thất bại' , titleSub: 'cart' }); -%>
+    <div id="app">
+        <section>
+            <div class="middleCart">
+                <div class="alertsuccess"><i class="cartnew-fail"></i><strong style="color: red;">Đặt hàng thất bại!</strong></div>
+                <div class="ordercontent">
+                    <p>Cảm ơn <b><%= b_firstname %></b> đã cho Aemobile cơ hội được phục vụ</p>
+                    <div class="info-order">
+                        <h4>ĐƠN HÀNG ĐÃ XẢY RA LỖI</h4>
+                        <p>Quý khách vui lòng liên hệ đường dây nóng để được hỗ trợ <a href="tel:0989898989">
+                            0989.89.89.89</a>.<br>
+                            Hoặc tiến hành đặt lại đơn hàng lần nữa. Cảm ơn quý khách!</p>
+                    </div>
+                    <div class="timetakegoods">
+                        <div><a href="/" class="buyanother">Trở về trang chủ</a></div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <script>$(document).ready(function(){$('.basket-cart-amount').text(0);localStorage.clear();})</script>
+<%- include('footer') -%>

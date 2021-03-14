@@ -1,0 +1,152 @@
+<%- include('header', { title: 'Tài khoản' , title_c: 'Quản lý tài khoản' }); -%>
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+        <!-- RIBBON -->
+        <div id="ribbon">
+
+            <span class="ribbon-button-alignment">
+                <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip"
+                    data-placement="bottom"
+                    data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings."
+                    data-html="true">
+                    <i class="fa fa-refresh"></i>
+                </span>
+            </span>
+
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li>Trang chính</li>
+                <li>Tài khoản</li>
+                <li>Quản lý tài khoản</li>
+            </ol>
+            <!-- end breadcrumb -->
+
+        </div>
+        <!-- END RIBBON -->
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+
+            <!-- widget grid -->
+            <section id="widget-grid" class="">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                        <h1 class="page-title txt-color-blueDark">
+                            <i class="fa fa-lg fa-fw fa-pencil-square-o"></i>
+                            Tài khoản
+                            <span>>
+                                Quản lý tài khoản
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- row -->
+                <div class="row">
+
+                    <!-- NEW WIDGET START -->
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0"
+                            data-widget-deletebutton="false" data-widget-togglebutton="false"
+                            data-widget-editbutton="false">
+
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                <h2>Biểu mẫu</h2>
+
+                            </header>
+
+                            <!-- widget div-->
+                            <div>
+
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body">
+                                    <form class="form-horizontal" id="UserAdminProfileForm" method="post" accept-charset="utf-8">
+                                        <div class="form-group">
+                                            <div class="col-md-4 col-md-offset-2">
+                                                <% if (error > 0){ %> 
+                                                <div class="alert alert-danger fade in">
+                                                    <button class="close" data-dismiss="alert">
+                                                        ×
+                                                    </button>
+                                                    <i class="fa-fw fa fa-times"></i>
+                                                    <strong>Lỗi!</strong>
+                                                    Cập nhật thất bại. Vui lòng kiểm tra lại.
+                                                </div>
+                                                <% } else if (error == 0) { %>
+                                                    <div class="alert alert-success fade in">
+                                                        <button class="close" data-dismiss="alert">
+                                                            ×
+                                                        </button>
+                                                        <i class="fa-fw fa fa-check"></i>
+                                                        <strong>Thành công!</strong>
+                                                        Thay đổi đã được lưu.
+                                                    </div>
+                                                <% }; %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-md-2 control-label">Tên đăng
+                                                nhập</label>
+                                            <div class="col-md-4"><input name="username" type="text"
+                                                    class="form-control usernameInput" maxlength="255"
+                                                    value="<%= user.username %>" id="username" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-md-2 control-label">Tên hiển thị<span
+                                                    class="required">(*)</span></label>
+                                            <div class="col-md-4">
+                                                <input name="displayName" required="required" minlength="5"
+                                                    class="form-control nameInput" maxlength="255" type="text"
+                                                    value="<%= user.displayName %>" id="displayName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-md-2 control-label">Địa chỉ
+                                                email<span class="required">(*)</span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input name="email" required="required"
+                                                    class="form-control emailInput" maxlength="255" type="email"
+                                                    value="<%= user.email %>" id="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-4 col-md-offset-2">
+                                                <input class="btn btn-primary" type="submit" value="Save">
+                                                <button type="button" class="btn btn-default"
+                                                    onclick="window.history.back();">Quay lại</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                </div>
+            </section>
+            <!-- end widget grid -->
+        </div>
+        <!-- END MAIN CONTENT -->
+
+    </div>
+    <!-- END MAIN PANEL -->
+<%- include('footer') -%>

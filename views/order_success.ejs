@@ -1,0 +1,113 @@
+<%- include('header', { title: 'Đặt hàng thành công' , titleSub: 'cart' }); -%>
+    <div id="app">
+        <section>
+            <div class="middleCart">
+                <div class="alertsuccess"><i class="cartnew-success"></i><strong>Đặt hàng thành công</strong></div>
+                <div class="ordercontent">
+                    <p>Cảm ơn <b>
+                            <%= orderSuccess.customer_name %>
+                        </b> đã cho AeMobile cơ hội được phục vụ.
+                        Trong 15 phút, nhân viên sẽ <b>gọi điện hoặc gửi email xác nhận <%= check_ship == 0 ? 'đơn hàng' : 'giao hàng' %></b> cho bạn!</p>
+                    <div class="info-order">
+                        <p>ĐƠN HÀNG #<%= orderSuccess.id %>
+                        </p>
+                        <label><i></i>
+                            <span>
+                                <strong>Người nhận hàng: </strong>
+                                <%= orderSuccess.customer_name %>, <%= orderSuccess.customer_phone %>
+                            </span>
+                        </label>
+                        <% if (check_ship == 0) { %> 
+                        <label><i></i>
+                            <span>
+                                <strong>Nhận hàng tại cửa hàng: </strong>
+                                <%= orderSuccess.address %>.
+                            </span>
+                        </label>
+                        <% } else if (check_ship == 1) { %> 
+                        <label><i></i>
+                            <span>
+                                <strong>Giao đến: </strong>
+                                <%= orderSuccess.address %> (nhân viên sẽ gọi xác nhận trước khi giao).
+                            </span>
+                        </label>
+                        <label><i></i>
+                            <span>
+                                <strong>Phí giao hàng: </strong>
+                                <b>
+                                    <%= orderSuccess.fee_ship.toLocaleString('it-IT') %>₫
+                                </b>
+                            </span>
+                        </label>
+                        <% }; %> 
+                        <label><i></i>
+                            <span>
+                                <strong>Tổng tiền: </strong>
+                                <b>
+                                    <%= orderSuccess.total_price.toLocaleString('it-IT') %>₫
+                                </b>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="cancel-order">
+                        <a href="javascript:;" class="cancel-order__cancel-button">Hủy đơn hàng</a>
+                    </div>
+                    <div class="cancel-order-popup" style="display:none;"><span class="helper"></span>
+                        <div>
+                            <h1>Hủy đơn hàng</h1>
+                            <p>Bạn có muốn hủy đơn hàng này ?</p>
+                            <input id="order_successId" type="hidden" readonly value="<%= orderSuccess.id %>">
+                            <p class="p1">Lưu ý : Giá và khuyến mãi có thể thay đổi tùy theo thời gian đặt hàng</p><button
+                                class="close-cancel-popup">Đóng</button><button class="confirm-cancel-popup">Xác nhận hủy</button>
+                        </div>
+                    </div>
+                    <div class="success-popup" style="display:none;"><span class="helper"></span>
+                        <div>
+                            <h1>Hủy đơn hàng thành công</h1>
+                            <p class="popup-detail">Đơn hàng đã được hủy thành công.</p>
+                            <button class="success-cencell-popup">Đóng</button>
+                        </div>
+                    </div>
+                    <div class="timetakegoods">
+                        <h4>Chi tiết đơn hàng</h4>
+                        <div class="box-order">
+                            <div class="rowtime"><span>Đặt hàng lúc <%= moment(orderSuccess.createdAt).format('h:mm:ss a, DD/MM/YYYY') %></span></div>
+                            <!---->
+                            <ul>
+
+                                <% jscartAll.forEach(function(product, index){ %>
+                                    <li>
+                                        <a href="/<%= product.productType + '/' + product.path_url %>" target="_blank"
+                                            class="img-order">
+                                            <img data-src="/uploads/<%= product.path_image %>"
+                                                src="/uploads/<%= product.path_image %>" loading="lazy"
+                                                class=" ls-is-cached lazyloaded"></a>
+                                        <div class="text-order"><a
+                                                href="/<%= product.productType + '/' + product.path_url %>"
+                                                target="_blank" class="text-order__product-name">
+                                                <%= product.productName %></a>
+                                            <div class="amount-color"><small>Màu: <%= product.color %></small><small>Số
+                                                    lượng: <%= product.qty %></small></div>
+                                        </div>
+                                    </li>
+                                    <% }); %>
+
+
+                            </ul>
+                            <div class="lastrow">
+                                <small>Tổng tiền:</small>
+                                <small>
+                                    <%= orderSuccess.total_price.toLocaleString('it-IT') %><sup
+                                            style="font-size:smaller">₫</sup>
+                                </small>
+                            </div>
+                            <!---->
+                        </div>
+                        <!---->
+                        <div><a href="/" class="buyanother"> Mua thêm sản phẩm khác </a></div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <script>$(document).ready(function(){$('.basket-cart-amount').text(0);localStorage.clear();})</script>
+<%- include('footer') -%>

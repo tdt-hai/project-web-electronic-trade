@@ -1,0 +1,1223 @@
+<%- include('header', { title: 'Sản phẩm' , title_c: 'Thêm sản phẩm' }); -%>
+
+	<style>	
+		.zoom {
+			transition: transform .2s;
+			margin: 0 auto;
+		}
+		.zoom:hover {
+			z-index:99999;
+			position:relative;
+			-ms-transform: scale(10); /* IE 9 */
+			-webkit-transform: scale(10); /* Safari 3-8 */
+			transform: scale(10); 
+		}
+	</style>
+	<!-- MAIN PANEL -->
+	<div id="main" role="main">
+
+		<!-- RIBBON -->
+		<div id="ribbon">
+
+			<span class="ribbon-button-alignment">
+				<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip"
+					data-placement="bottom"
+					data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings."
+					data-html="true">
+					<i class="fa fa-refresh"></i>
+				</span>
+			</span>
+
+			<!-- breadcrumb -->
+			<ol class="breadcrumb">
+				<li>Trang chính</li>
+				<li>Bài viết</li>
+				<li>Sản phẩm</li>
+				<li><%= product ? 'Sửa sản phẩm' : 'Thêm mới' %></li>
+			</ol>
+			<!-- end breadcrumb -->
+
+		</div>
+		<!-- END RIBBON -->
+
+		<!-- MAIN CONTENT -->
+		<div id="content">
+
+			<!-- widget grid -->
+			<section id="widget-grid" class="">
+
+				<!-- row -->
+				<div class="row">
+
+					<!-- NEW WIDGET START -->
+					<article class="col-sm-12 col-md-12">
+
+						<!-- Widget ID (each widget will need unique ID)-->
+						<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0"
+							data-widget-togglebutton="false" data-widget-editbutton="false"
+							data-widget-deletebutton="false">
+
+							<header>
+								<span class="widget-icon"> <i class="fa fa-check"></i> </span>
+								<h2><%= product ? 'Sửa sản phẩm' : 'Thêm sản phẩm mới' %></h2>
+
+							</header>
+
+							<!-- widget div-->
+							<div>
+
+								<!-- widget edit box -->
+								<div class="jarviswidget-editbox">
+									<!-- This area used as dropdown edit box -->
+
+								</div>
+								<!-- end widget edit box -->
+
+								<!-- widget content -->
+								<div class="widget-body">
+
+									<div class="row">
+										<form id="wizard-1" novalidate="novalidate" enctype="multipart/form-data"
+											method="POST">
+											<div id="bootstrap-wizard-1" class="col-sm-12">
+												<div class="form-bootstrapWizard">
+													<ul class="bootstrapWizard form-wizard">
+														<li class="active" data-target="#step1"
+															style="pointer-events:none;">
+															<a href="#tab1" data-toggle="tab"> 
+																<span class="step">1</span> <span class="title"><b>
+																	Phân loại sản phẩm</b><br>
+																	<div id="CateTitle"></div>
+																	<div id="CateGroupTitle"><%= product ? 'Nhóm: ' + product_group.groupName : '' %></div>
+																</span> 
+															</a>
+														</li>
+														<li data-target="#step2" style="pointer-events:none;">
+															<a href="#tab2" data-toggle="tab"> <span
+																	class="step">2</span> <span class="title"><b>Thông số
+																	kỹ thuật & Giá</b></span> </a>
+														</li>
+														<li data-target="#step3" style="pointer-events:none;">
+															<a href="#tab3" data-toggle="tab"> <span
+																	class="step">3</span> <span class="title"><b>Màu sắc &
+																	Bài viết</b></span> </a>
+														</li>
+														<li data-target="#step4" style="pointer-events:none;">
+															<a href="#tab4" data-toggle="tab"> 
+																<span class="step">4</span> <span class="title"><b>
+																	Lưu sản phẩm</b>
+																</span> 
+															</a>
+														</li>
+													</ul>
+													<div class="clearfix"></div>
+												</div>
+												<div class="tab-content">
+													<div class="tab-pane active" id="tab1">
+														<br>
+														<h3 class="text-center"><strong>Bước 1 </strong> - Phân loại sản
+															phẩm</h3>
+
+														<div class="row">
+															<div class="col-sm-4 center-block" style="float:none">
+																<div class="form-group">
+																	<div class="input-group">
+																		<span class="input-group-addon"><i
+																				class="fa fa-cube fa-lg fa-fw"></i></span>
+																		<select name="category" id="category"
+																			<%= product ? 'disabled' : '' %> 
+																			class="form-control input-lg">
+																			<option value="" <%=product ?
+																				((product.type==='' ) ? 'selected' : ''
+																				) : '' %>>---
+																				Danh mục ---</option>
+																			<option value="dien-thoai" <%=product ?
+																				((product.type==='dien-thoai' )
+																				? 'selected' : '' ) : '' %>>Điện thoại
+																			</option>
+																			<option value="may-tinh-bang" <%=product ?
+																				((product.type==='may-tinh-bang' )
+																				? 'selected' : '' ) : '' %>>Máy tính
+																				bảng
+																			</option>
+																			<option value="smart-watch" <%=product ?
+																				((product.type==='smart-watch' ) ? 'selected'
+																				: '' ) : '' %>>Smart Watch</option>
+																			<option value="phu-kien" <%=product ?
+																				((product.type==='phu-kien' )
+																				? 'selected' : '' ) : '' %>>Phụ kiện
+																			</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="col-sm-4 center-block" style="float:none">
+																<div class="form-group">
+																	<div class="input-group">
+																		<span class="input-group-addon"><i
+																				class="fa fa-bars fa-lg fa-fw"></i></span>
+																		<select name="producer" id="producer"
+																			class="form-control input-lg" disabled>
+																			<option value="" <%=product ?
+																				((product.producer==='' ) ? 'selected'
+																				: '' ) : '' %>>--- Nhà
+																				sản xuất ---</option>
+																			<option class="cateAP divHidden" value="Apple" <%=product ?
+																				((product.producer==='Apple' )
+																				? 'selected' : '' ) : '' %>>Apple
+																			</option>
+																			<option class="cateAP_IP divHidden" value="Iphone" <%=product ?
+																				((product.producer==='Iphone' )
+																				? 'selected' : '' ) : '' %>>Apple Iphone
+																			</option>
+																			<option class="cateAP_IPa divHidden" value="Ipad" <%=product ?
+																				((product.producer==='Ipad' )
+																				? 'selected' : '' ) : '' %>>Apple Ipad
+																			</option>
+																			<option value="Samsung" <%=product ?
+																				((product.producer==='Samsung' )
+																				? 'selected' : '' ) : '' %>>Samsung
+																			</option>
+																			<option value="Xiaomi" <%=product ?
+																				((product.producer==='Xiaomi' )
+																				? 'selected' : '' ) : '' %>>Xiaomi
+																			</option>
+																			<option value="Oppo" <%=product ?
+																				((product.producer==='Oppo' )
+																				? 'selected' : '' ) : '' %>>Oppo
+																			</option>
+																			<option value="LG" <%=product ?
+																				((product.producer==='LG' ) ? 'selected'
+																				: '' ) : '' %>>LG</option>
+																			<option value="Vsmart" <%=product ?
+																				((product.producer==='Vsmart' )
+																				? 'selected' : '' ) : '' %>>Vsmart
+																			</option>
+																			<option value="Google" <%=product ?
+																				((product.producer==='Google' )
+																				? 'selected' : '' ) : '' %>>Google
+																			</option>
+																			<option value="Huawei" <%=product ?
+																				((product.producer==='Huawei' )
+																				? 'selected' : '' ) : '' %>>Huawei
+																			</option>
+																			<option value="OnePlus" <%=product ?
+																				((product.producer==='OnePlus' )
+																				? 'selected' : '' ) : '' %>>OnePlus
+																			</option>
+																			<option value="Lenovo" <%=product ?
+																				((product.producer==='Lenovo' )
+																				? 'selected' : '' ) : '' %>>Lenovo
+																			</option>
+																			<option value="Masstel" <%=product ?
+																				((product.producer==='Masstel' )
+																				? 'selected' : '' ) : '' %>>Masstel
+																			</option>
+																			<option value="Mobell" <%=product ?
+																				((product.producer==='Mobell' )
+																				? 'selected' : '' ) : '' %>>Mobell
+																			</option>
+																			<option value="Garmin" <%=product ?
+																				((product.producer==='Garmin' )
+																				? 'selected' : '' ) : '' %>>Garmin
+																			</option>
+																			<option value="Anker" <%=product ?
+																				((product.producer==='Anker' )
+																				? 'selected' : '' ) : '' %>>Anker
+																			</option>
+																			<option value="Xmobile" <%=product ?
+																				((product.producer==='Xmobile' )
+																				? 'selected' : '' ) : '' %>>Xmobile
+																			</option>
+																			<option value="Ava" <%=product ?
+																				((product.producer==='Ava' )
+																				? 'selected' : '' ) : '' %>>Ava
+																			</option>
+																			<option value="Evalu" <%=product ?
+																				((product.producer==='Evalu' )
+																				? 'selected' : '' ) : '' %>>Evalu
+																			</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="col-sm-4 center-block" style="float:none">
+																<div class="form-group">
+																	<div class="input-group">
+																		<span class="input-group-addon">
+																			<i class="fa fa-sitemap fa-lg fa-fw"></i>
+																		</span>
+																		<select name="productGroup" style="width:100%"
+																			id="productGroup" class="select2" <%=product
+																			? '' : 'disabled' %>>
+																			<option value="">--- Chọn nhóm sản phẩm ---</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane" id="tab2">
+														<br>
+														<h3 class="text-center"><strong>Bước 2</strong> - Thông số kỹ
+															thuật & Giá</h3>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-tag fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg name_vieInput"
+																				placeholder="Tên sản phẩm" type="text"
+																				name="productName" id="productName"
+																				value="<%= product ? product.name : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-usd fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg priceVND"
+																				placeholder="Giá tiền VNĐ" type="text"
+																				name="productPrice" id="productPrice"
+																				value="<%= product ? product.price.toLocaleString('it-IT') : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														<div id="cateDtdd" class="divHidden">
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-desktop fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Màn hình" type="text"
+																				name="productScreen" id="productScreen"
+																				value="<%= product ? product.screen : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-windows fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Hệ điều hành" type="text"
+																				name="OS" id="OS" value="<%= product ? product.operation : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-camera fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Camera sau" type="text"
+																				name="rearCamera" id="rearCamera"
+																				value="<%= product ? product.cam_behind : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-camera fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Camera trước" type="text"
+																				name="frontCamera" id="frontCamera"
+																				value="<%= product ? product.cam_front : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-microchip fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="CPU" type="text" name="CPU"
+																				id="CPU" value="<%= product ? product.cpu : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-microchip fa-lg fa-fw"></i></span>
+																			<select name="RAM" id="RAM"
+																				class="form-control input-lg">
+																				<option value="" selected>RAM
+																				</option>
+																				<option value="2" <%= product ? (product.ram === '2' ? 'selected' : '') : '' %>>2 GB</option>
+																				<option value="3" <%= product ? (product.ram === '3' ? 'selected' : '') : '' %>>3 GB</option>
+																				<option value="4" <%= product ? (product.ram === '4' ? 'selected' : '') : '' %>>4 GB</option>
+																				<option value="6" <%= product ? (product.ram === '6' ? 'selected' : '') : '' %>>6 GB</option>
+																				<option value="8" <%= product ? (product.ram === '8' ? 'selected' : '') : '' %>>8 GB</option>
+																				<option value="12" <%= product ? (product.ram === '12' ? 'selected' : '') : '' %>>12 GB</option>
+																				<option value="16" <%= product ? (product.ram === '16' ? 'selected' : '') : '' %>>16 GB</option>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-hdd-o fa-lg fa-fw"></i></span>
+																			<select name="storage" id="storage"
+																				class="form-control input-lg">
+																				<option value="" selected="selected">Bộ nhớ
+																					trong</option>
+																				<option value="8" <%= product ? (product.storage === '8' ? 'selected' : '') : '' %>>8 GB</option>
+																				<option value="16" <%= product ? (product.storage === '16' ? 'selected' : '') : '' %>>16 GB</option>
+																				<option value="32" <%= product ? (product.storage === '32' ? 'selected' : '') : '' %>>32 GB</option>
+																				<option value="64" <%= product ? (product.storage === '64' ? 'selected' : '') : '' %>>64 GB</option>
+																				<option value="128" <%= product ? (product.storage === '128' ? 'selected' : '') : '' %>>128 GB</option>
+																				<option value="256" <%= product ? (product.storage === '256' ? 'selected' : '') : '' %>>256 GB</option>
+																				<option value="512" <%= product ? (product.storage === '512' ? 'selected' : '') : '' %>>512 GB</option>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-signal fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Thẻ sim" type="text" name="Sim"
+																				id="Sim" value="<%= product ? product.sim : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-battery-three-quarters fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Dung lượng pin" type="text"
+																				name="batteryCapacity" id="batteryCapacity"
+																				value="<%= product ? product.pin : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-calendar fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				data-dateformat="dd/mm/yyyy"
+																				placeholder="Thời điểm ra mắt" type="date"
+																				name="released" id="released"
+																				value="<%= product ? product.released : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div id="cateMTB" class="divHidden">
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-phone fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Đàm thoại" type="text"
+																				name="conversation" id="conversation"
+																				value="<%= product ? product.conversation : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-wifi fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Kết nối mạng" type="text"
+																				name="network_connection" id="network_connection"
+																				value="<%= product ? product.network_connection : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div id="cateSW" class="divHidden">
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-desktop fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Màn hình Smart Watch" type="text"
+																				name="productScreenSW" id="productScreenSW"
+																				value="<%= product ? product.screen : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-windows fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg"
+																				placeholder="Hệ điều hành Smart Watch" type="text"
+																				name="OS_SW" id="OS_SW" value="<%= product ? product.operation : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-expand fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Kích thước màn hình" type="text"
+																				name="screen_size" id="screen_size"
+																				value="<%= product ? product.screen_size : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-battery-three-quarters fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Thời gian sử dụng pin" type="text"
+																				name="battery_life_time" id="battery_life_time"
+																				value="<%= product ? product.battery_life_time : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-apple fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Kết nối với hệ điều hành" type="text"
+																				name="connect_os" id="connect_os"
+																				value="<%= product ? product.connect_os : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-bullseye fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Chất liệu mặt" type="text"
+																				name="face_material" id="face_material"
+																				value="<%= product ? product.face_material : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-arrows-v fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Đường kính mặt" type="text"
+																				name="face_diameter" id="face_diameter"
+																				value="<%= product ? product.face_diameter : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-wifi fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Kết nối" type="text"
+																				name="connect" id="connect"
+																				value="<%= product ? product.connect : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-language fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Ngôn ngữ" type="text"
+																				name="language" id="language"
+																				value="<%= product ? product.language : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-medkit fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Theo dõi sức khỏe" type="text"
+																				name="health_monitor" id="health_monitor"
+																				value="<%= product ? product.health_monitor : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div id="catePK" class="divHidden">
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-ravelry fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Chức năng" type="text"
+																				name="functionP" id="functionP"
+																				value="<%= product ? product.functionP : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-share fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Đầu ra" type="text"
+																				name="output" id="output"
+																				value="<%= product ? product.output : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-bolt fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Công nghệ/Tiện ích" type="text"
+																				name="tech_util" id="tech_util"
+																				value="<%= product ? product.tech_util : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-arrow-right fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Độ dài dây" type="text"
+																				name="wire_length" id="wire_length"
+																				value="<%= product ? product.wire_length : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-trademark fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Thương hiệu" type="text"
+																				name="trademark" id="trademark"
+																				value="<%= product ? product.trademark : '' %>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="form-group">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																					class="fa fa-industry fa-lg fa-fw"></i></span>
+																			<input class="form-control input-lg" required
+																				placeholder="Sản xuất tại" type="text"
+																				name="made_in" id="made_in"
+																				value="<%= product ? product.made_in : '' %>">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="alert alert-info fade in">
+															<i class="fa-fw fa fa-info"></i>
+															<strong>SEO</strong> information
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group">
+																	<div class="input-group">
+																		<span class="input-group-addon"><i
+																				class="fa fa-link fa-lg fa-fw"></i></span>
+																		<input class="form-control input-lg slugInput"
+																			readonly value="<%= product ? product.path_url : '' %>"
+																			placeholder="Tự động sinh ra..."
+																			type="text" name="path_url" id="path_url">
+																	</div>
+																	<div class="note slugDemo">
+																		<strong>URL:</strong>
+																		<%= url %>/danh-muc-san-pham/<span
+																			class="slugHere"
+																			style="color:red;">path-is-here</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane" id="tab3">
+														<br>
+														<h3 class="text-center"><strong>Bước 3</strong> - Màu sắc & Bài
+															viết</h3>
+														<div class="jarviswidget jarviswidget-color-darken"
+															id="wid-id-0" data-widget-colorbutton="false"
+															data-widget-editbutton="false"
+															data-widget-togglebutton="false"
+															data-widget-fullscreenbutton="false"
+															data-widget-sortable="false"
+															data-widget-deletebutton="false">
+															<header>
+																<span class="widget-icon"> <i class="fa fa-usd"></i>
+																</span>
+																<h2>Màu sắc & Số lượng</h2>
+															</header>
+															<div class="row">
+
+																<% if (product) { %> 
+																	<div id="new_tloc">
+																	<% for(let i=0; i<extend_products.length; i++){%>
+																		<div id="newField_<%=i+1%>">
+																			<div class="row">
+																				<div class="col-sm-4 col-md-2 col-lg-3">
+																					<div class="form-group">
+																						<div class="input-group">
+																							<span class="input-group-addon"><i
+																									class="fa fa-adjust fa-lg fa-fw"></i></span>
+																								<select name="productColor_<%=i+1%>"
+																									id="productColor_<%=i+1%>" required 
+																									<%= extend_products[i] ? 'style=pointer-events:none; readonly' : '' %> 
+																									class="form-control input-lg">
+																									<option value="" selected="selected">
+																										--- Màu sắc ---</option>
+																									<option value="Đen" <%= extend_products[i].color === 'Đen' ? 'selected' : '' %>>Đen</option>
+																									<option value="Đỏ" <%= extend_products[i].color === 'Đỏ' ? 'selected' : '' %>>Đỏ</option>
+																									<option value="Trắng" <%= extend_products[i].color === 'Trắng' ? 'selected' : '' %>>Trắng</option>
+																									<option value="Xanh" <%= extend_products[i].color === 'Xanh' ? 'selected' : '' %>>Xanh</option>
+																									<option value="Xanh dương" <%= extend_products[i].color === 'Xanh dương' ? 'selected' : '' %>>Xanh dương</option>
+																									<option value="Xanh dương nhạt" <%= extend_products[i].color === 'Xanh dương nhạt' ? 'selected' : '' %>>Xanh dương nhạt</option>
+																									<option value="Xanh da trời" <%= extend_products[i].color === 'Xanh da trời' ? 'selected' : '' %>>Xanh da trời</option>
+																									<option value="Xanh da trời nhạt" <%= extend_products[i].color === 'Xanh da trời nhạt' ? 'selected' : '' %>>Xanh da trời nhạt</option>
+																									<option value="Xanh lá" <%= extend_products[i].color === 'Xanh lá' ? 'selected' : '' %>>Xanh lá</option>
+																									<option value="Xanh ngọc" <%= extend_products[i].color === 'Xanh ngọc' ? 'selected' : '' %>>Xanh ngọc</option>
+																									<option value="Vàng đồng" <%= extend_products[i].color === 'Vàng đồng' ? 'selected' : '' %>>Vàng đồng</option>
+																									<option value="Tím" <%= extend_products[i].color === 'Tím' ? 'selected' : '' %>>Tím</option>
+																									<option value="Xám" <%= extend_products[i].color === 'Xám' ? 'selected' : '' %>>Xám</option>
+																									<option value="Bạc" <%= extend_products[i].color === 'Bạc' ? 'selected' : '' %>>Bạc</option>
+																									<option value="Hồng" <%= extend_products[i].color === 'Hồng' ? 'selected' : '' %>>Hồng</option>
+																								</select>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-sm-2 col-md-2 col-lg-2">
+																					<div class="form-group">
+																						<div class="input-group">
+																							<span class="input-group-addon"><i
+																									class="fa fa-tasks fa-lg fa-fw"></i></span>
+																							<input class="form-control input-lg"
+																								placeholder="Qty" type="text"
+																								name="productQty_<%=i+1%>" required
+																								id="productQty_<%=i+1%>" <%= extend_products[i] ? 'readonly' : '' %>
+																								value="<%= extend_products[i].amount %>">
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-sm-6 col-md-4 col-lg-4">
+																					<div class="form-group">
+																						<div class="input-group">
+																							<span class="input-group-addon">
+																								<img src="/uploads/<%= extend_products[i].path_image %>"
+																								style="width:30px;height:30px;" class="zoom"
+																								alt="<%= extend_products[i].path_image %>">
+																							</span>
+																							<input type="file"
+																								class="btn btn-default btn-lg input-lg"
+																								id="productImg_<%=i+1%>"
+																								name="productImg_<%=i+1%>">
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<hr style="border-top:1px solid rgba(0,0,0,.1);margin-top:0;">
+																		</div>
+																	<% } %>
+																	</div>
+																<% } else { %>
+																	<div class="row">
+																		<div class="col-sm-4 col-md-2 col-lg-3">
+																			<div class="form-group">
+																				<div class="input-group">
+																					<span class="input-group-addon"><i
+																							class="fa fa-adjust fa-lg fa-fw"></i></span>
+																						<select name="productColor_1"
+																							id="productColor_1" required
+																							class="form-control input-lg">
+																							<option value="">
+																								--- Màu sắc ---</option>
+																							<option value="Đen">Đen</option>
+																							<option value="Đỏ">Đỏ</option>
+																							<option value="Trắng">Trắng</option>
+																							<option value="Xanh">Xanh</option>
+																							<option value="Xanh dương">Xanh dương</option>
+																							<option value="Xanh dương nhạt">Xanh dương nhạt</option>
+																							<option value="Xanh da trời">Xanh da trời</option>
+																							<option value="Xanh da trời nhạt">Xanh da trời nhạt</option>
+																							<option value="Xanh lá">Xanh lá</option>
+																							<option value="Xanh ngọc">Xanh ngọc</option>
+																							<option value="Vàng đồng">Vàng đồng</option>
+																							<option value="Tím">Tím</option>
+																							<option value="Xám">Xám</option>
+																							<option value="Bạc">Bạc</option>
+																							<option value="Hồng">Hồng</option>
+																						</select>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-sm-2 col-md-2 col-lg-2">
+																			<div class="form-group">
+																				<div class="input-group">
+																					<span class="input-group-addon"><i
+																							class="fa fa-tasks fa-lg fa-fw"></i></span>
+																					<input class="form-control input-lg"
+																						placeholder="Qty" type="text"
+																						name="productQty_1" required
+																						id="productQty_1">
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-sm-6 col-md-4 col-lg-4">
+																			<div class="form-group">
+																				<div class="input-group">
+																					<span class="input-group-addon"><i
+																							class="fa fa-file-image-o fa-lg fa-fw"></i></span>
+																					<input type="file"
+																						class="btn btn-default btn-lg input-lg"
+																						id="productImg_1" required
+																						name="productImg_1">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<hr style="border-top:1px solid rgba(0,0,0,.1);margin-top:0;">
+																	<div id="new_tloc"></div>
+																<% } %>
+
+																<div id="new_tloc"></div>
+																<input type="hidden" value="<%= product ? extend_products.length : '1' %>" name="total_tloc"
+																	id="total_tloc">
+																<div class="col text-center"
+																	style="margin-bottom: 14px;float:none">
+																	<a
+																		class="btn btn-primary addMore_fieldList">Thêm</a>&emsp;
+																	<a
+																		class="btn btn-primary removeMore_fieldList">Xóa</a>
+																</div>
+															</div>
+														</div>
+														<div class="alert alert-info fade in">
+															<button class="close" data-dismiss="alert"> × </button>
+															<i class="fa-fw fa fa-info"></i>
+															<strong>Thông tin!</strong> Nội dung bài viết rõ ràng kèm
+															hình ảnh.
+														</div>
+														<div class="jarviswidget jarviswidget-color-darken"
+															id="wid-id-0" data-widget-colorbutton="false"
+															data-widget-editbutton="false"
+															data-widget-togglebutton="false"
+															data-widget-fullscreenbutton="false"
+															data-widget-sortable="false"
+															data-widget-deletebutton="false">
+															<header>
+																<span class="widget-icon"> <i class="fa fa-pencil"></i>
+																</span>
+																<h2>Bài viết chi tiết</h2>
+															</header>
+															<div class="form-group">
+																<div class="jarviswidget-editbox"></div>
+																<!-- widget content -->
+																<div class="widget-body no-padding">
+																	<textarea id="ckeditor" type="text" name="ckeditor">
+																		<%= product ? product.describe_content : 'Bài viết' %>
+																	</textarea>
+																</div>
+																<!-- end widget content -->
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane" id="tab4">
+														<br>
+														<h3 class="text-center"><strong>Bước 4</strong> - Lưu sản phẩm
+														</h3>
+														<br>
+														<h1 class="text-center text-success"><strong><i
+																	class="fa fa-check fa-lg"></i> Hoàn tất</strong>
+														</h1>
+														<h4 class="text-center">Nhấn Lưu để lưu lại!</h4>
+														<br>
+														<div class="text-center">
+															<h5>
+																<label class="checkbox">
+																	<input type="checkbox" name="checkbox-hangcty"
+																		id="checkbox-hangcty" <%= product ? (product.isHangCongTy === true ? 'checked' : '') : '' %>>
+																	<i></i>Hàng công ty?
+																</label>
+																<label class="radio">
+																	<input type="radio" name="radio-tg_sgg" <%= product ? (product.isTraGop === true ? 'checked' : '') : 'checked' %>
+																		value="tra-gop">
+																	<i></i>Trả góp 0%
+																</label>
+																<label class="radio">
+																	<input type="radio" name="radio-tg_sgg" <%= product ? (product.isSieuGiamGia === true ? 'checked' : '') : '' %>
+																		value="sieu-giam-gia">
+																	<i></i>Siêu giảm giá
+																</label>
+																<label class="checkbox">
+																	<input type="checkbox" name="checkbox-noibat"
+																		id="checkbox-noibat" <%= product ? (product.isNoiBat === true ? 'checked' : '') : '' %>>
+																	<i></i>Nổi bật?
+																</label>
+																<label class="checkbox">
+																	<input type="checkbox" name="checkbox-isKichhoat"
+																		id="checkbox-isKichhoat" <%= product ? (product.status === true ? 'checked' : '') : 'checked' %>>
+																	<i></i>Kích hoạt?
+																</label>
+															</h5>
+														</div>
+														<br>
+														<div class="col text-center">
+															<input class="btn btn-primary btn-lg" type="submit"
+																value="Lưu">
+														</div>
+													</div>
+
+													<div class="form-actions">
+														<div class="row">
+															<div class="col-sm-12">
+																<ul class="pager wizard no-margin">
+																	<!--<li class="previous first disabled">
+																	<a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
+																	</li>-->
+																	<li class="previous disabled">
+																		<a href="javascript:void(0);"
+																			class="btn btn-lg btn-default"> Trở lại
+																		</a>
+																	</li>
+																	<% if (product){ %> 
+																	<li class="col text-center next">
+																		<input class="btn btn-primary btn-md" type="submit" value="Lưu">
+																	</li>
+																	<% }; %> 
+																	<!-- <li class="next last">
+																	<a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
+																	</li> -->
+																	<li class="next">
+																		<a href="javascript:void(0);"
+																			class="btn btn-lg txt-color-darken"> Kế tiếp
+																		</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+
+								</div>
+								<!-- end widget content -->
+
+							</div>
+							<!-- end widget div -->
+
+						</div>
+						<!-- end widget -->
+
+					</article>
+					<!-- WIDGET END -->
+
+				</div>
+				<!-- end row -->
+
+			</section>
+			<!-- end widget grid -->
+		</div>
+		<!-- END MAIN CONTENT -->
+
+	</div>
+	<!-- END MAIN PANEL -->
+
+	<% if (product) { %>
+
+		<script>
+			$(document).ready(function () {
+				$('span#select2-chosen-2').text(`<%= product_group.groupName %>`);
+				$('span.select2-hidden-accessible').text(`<%= product_group.groupName %>`);
+				$.ajax({
+					type: "POST",
+					url: `/admincp/product/add/load-productGr`,
+					data: {
+						category: $("#category").val(),
+						producer: $("#producer").val()
+					},
+					dataType: 'json',
+					timeout: 10000,
+					success: function (data) {
+						var result = `<option value="" selected>---
+										Chọn nhóm sản phẩm ---</option>`;
+						$.each(data.productGr, function (i, productGr) {
+							result += `
+							<option value="${productGr.id}" ${ (productGr.id == `<%= product.group %>`) ? "selected": ""}>${productGr.groupName}</option>
+									`;
+						});
+						$("#productGroup").empty();
+						$("#productGroup").append(result);
+					},
+					statusCode: {
+						404: function () {
+							alert("Not found!");
+						}
+					}
+				});
+				//$("#productGroup option[value='1']").addClass('active');
+			});
+		</script>
+
+	<% } %>
+
+	<script type="text/javascript">
+		$('#category').on('change', function () {
+			if ($('#category').val() != '') {
+				$("#producer").prop('disabled', false);
+				$('#producer').prop('selectedIndex', 0);
+				$("#productGroup").select2('val', '');
+				$('#productGroup').prop('selectedIndex', 0);
+				$("#productGroup").empty();
+			}
+			else {
+				$("#producer").prop('disabled', true);
+			}
+		});
+
+		$('#producer').on('change', function () {
+			if ($('#producer').val() != '') {
+				$("#productGroup").prop('disabled', false);
+				$('#productGroup').prop('selectedIndex', 0);
+				$("#productGroup").select2('val', '');
+			}
+			else {
+				$("#productGroup").prop('disabled', true);
+			}
+
+			$.ajax({
+				type: "POST",
+				url: `/admincp/product/add/load-productGr`,
+				data: {
+					category: $("#category").val(),
+					producer: $("#producer").val()
+				},
+				dataType: 'json',
+				timeout: 10000,
+				success: function (data) {
+					var result = `<option value="" selected>---
+									Chọn nhóm sản phẩm ---</option>`;
+					$.each(data.productGr, function (i, productGr) {
+						result += `
+                        <option value="${productGr.id}">${productGr.groupName}</option>
+                                `;
+					});
+					$("#productGroup").empty();
+					$("#productGroup").append(result);
+				},
+				statusCode: {
+					404: function () {
+						alert("Not found!");
+					}
+				}
+			});
+		});
+	</script>
+
+<!-- Add Product Details -->
+<script>
+	$(document).ready(function() {
+		$('#CateTitle').text($('#category option:selected').text());
+
+		if ($('#category option:selected').val() === 'dien-thoai') {
+			$("#cateDtdd").removeClass("divHidden");
+		}
+
+		if ($('#category option:selected').val() === 'may-tinh-bang') {
+			$("#cateDtdd").removeClass("divHidden");
+			$("#cateMTB").removeClass("divHidden");
+		}
+
+		if ($('#category option:selected').val() === 'smart-watch') {
+			$("#cateSW").removeClass("divHidden");
+		}
+
+		if ($('#category option:selected').val() === 'phu-kien') {
+			$("#catePK").removeClass("divHidden");
+		}
+
+		$('#category').on('change', function() {
+			$(".cateAP").addClass("divHidden");
+			$(".cateAP_IP").addClass("divHidden");
+			$(".cateAP_IPa").addClass("divHidden");
+
+			$(".cateAP").attr("disabled", "disabled");
+			$(".cateAP_IP").attr("disabled", "disabled");
+			$(".cateAP_IPa").attr("disabled",  "disabled");
+
+			if ($('#category option:selected').val() === 'dien-thoai') {
+				$(".cateAP_IP").removeClass("divHidden");
+				$(".cateAP_IP").removeAttr("disabled");
+			}
+			else if ($('#category option:selected').val() === 'may-tinh-bang') {
+				$(".cateAP_IPa").removeClass("divHidden");
+				$(".cateAP_IPa").removeAttr("disabled");
+			} else {
+				$(".cateAP").removeClass("divHidden");
+				$(".cateAP").removeAttr("disabled");
+			}
+
+			$('#CateTitle').text($('#category option:selected').text());
+			$('#CateGroupTitle').text('');
+
+			$("#cateDtdd").addClass("divHidden");
+			$("#cateMTB").addClass("divHidden");
+			$("#cateSW").addClass("divHidden");
+			$("#catePK").addClass("divHidden");
+
+			if ($('#category option:selected').val() === 'dien-thoai') {
+				$("#cateDtdd").removeClass("divHidden");
+			}
+
+			if ($('#category option:selected').val() === 'may-tinh-bang') {
+				$("#cateDtdd").removeClass("divHidden");
+				$("#cateMTB").removeClass("divHidden");
+			}
+
+			if ($('#category option:selected').val() === 'smart-watch') {
+				$("#cateSW").removeClass("divHidden");
+			}
+
+			if ($('#category option:selected').val() === 'phu-kien') {
+				$("#catePK").removeClass("divHidden");
+			}
+
+			var cateSelected = $('#category option:selected').val();
+			var cateProducerSelected = $('#producer option:selected').val();
+			var catePGrSelected = $('#productGroup option:selected').val();
+			$('#wizard-1')[0].reset();
+			$('#category').val(cateSelected);
+			$('#producer').val(cateProducerSelected);
+			$('#productGroup').val(catePGrSelected);
+		});
+
+		$('#productGroup').on("change", function () {
+			$('#CateGroupTitle').text('Nhóm: '+$('#productGroup option:selected').text());
+			
+			var cateSelected = $('#category option:selected').val();
+			var cateProducerSelected = $('#producer option:selected').val();
+			var catePGrSelected = $('#productGroup option:selected').val();
+			$('#wizard-1')[0].reset();
+			$('#category').val(cateSelected);
+			$('#producer').val(cateProducerSelected);
+			$('#productGroup').val(catePGrSelected);
+			$('#productName').attr('placeholder',$('#productGroup option:selected').text());
+		});
+
+		$('#producer').on("change", function () {
+			var cateSelected = $('#category option:selected').val();
+			var cateProducerSelected = $('#producer option:selected').val();
+			var catePGrSelected = $('#productGroup option:selected').val();
+			$('#wizard-1')[0].reset();
+			$('#category').val(cateSelected);
+			$('#producer').val(cateProducerSelected);
+			$('#productGroup').val(catePGrSelected);
+		});
+
+		// $(".priceVND").each(function () {
+		// 	$(this).format({ format: "#,###", locale: "us" });
+		// });
+	});
+</script>
+
+<!-- AddMore fieldList -->
+<script>
+	$('.addMore_fieldList').on('click', add);
+	$('.removeMore_fieldList').on('click', remove);
+
+	function add() {
+		var new_tloc_no = parseInt($('#total_tloc').val()) + 1;
+		var new_input = "<div id='newField_" + new_tloc_no + "'><div class='row'><div class='col-sm-4 col-md-2 col-lg-3'> <div class='form-group'> <div class='input-group'> <span class='input-group-addon'><i class='fa fa-adjust fa-lg fa-fw'></i></span> <select name='productColor_" + new_tloc_no + "' id='productColor_" + new_tloc_no + "' class='form-control input-lg' required> <option value=''>--- Màu sắc ---</option> <option value='Đen'>Đen</option><option value='Đỏ'>Đỏ</option><option value='Trắng'>Trắng</option><option value='Xanh'>Xanh</option><option value='Xanh dương'>Xanh dương</option><option value='Xanh dương nhạt'>Xanh dương nhạt</option><option value='Xanh da trời'>Xanh da trời</option><option value='Xanh da trời nhạt'>Xanh da trời nhạt</option><option value='Xanh lá'>Xanh lá</option><option value='Xanh ngọc'>Xanh ngọc</option><option value='Vàng đồng'>Vàng đồng</option><option value='Tím'>Tím</option><option value='Xám'>Xám</option><option value='Bạc'>Bạc</option><option value='Hồng'>Hồng</option> </select> </div> </div> </div><div class='col-sm-2 col-md-2 col-lg-2'> <div class='form-group'> <div class='input-group'> <span class='input-group-addon'><i class='fa fa-tasks fa-lg fa-fw'></i></span> <input class='form-control input-lg' placeholder='Qty' type='text' name='productQty_" + new_tloc_no + "' id='productQty_" + new_tloc_no + "' required> </div> </div> </div> <div class='col-sm-6 col-md-4 col-lg-4'> <div class='form-group'> <div class='input-group'> <span class='input-group-addon'><i class='fa fa-file-image-o fa-lg fa-fw'></i></span> <input type='file' class='btn btn-default btn-lg input-lg' id='productImg_" + new_tloc_no + "' name='productImg_" + new_tloc_no + "' required> </div> </div> </div></div><hr style='border-top:1px solid rgba(0,0,0,.1);margin-top:0;'></div>";
+
+		$('#new_tloc').append(new_input);
+		$('#total_tloc').val(new_tloc_no);
+	}
+
+	function remove() {
+		var last_tloc_no = $('#total_tloc').val();
+
+		if (last_tloc_no > 1) {
+			$('#newField_' + last_tloc_no).remove();
+			$('#total_tloc').val(last_tloc_no - 1);
+		}
+	}
+</script>
+<script>
+	$(document).ready(function () {
+		// CKEDITOR
+		CKEDITOR.replace('ckeditor', { height: '380px', startupFocus: true });
+	});
+</script>
+
+<%- include('footer') -%>

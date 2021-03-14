@@ -1,0 +1,316 @@
+<%- include('header', { title: 'Nhóm sản phẩm' , title_c: 'Thêm nhóm sản phẩm' }); -%>
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+        <!-- RIBBON -->
+        <div id="ribbon">
+
+            <span class="ribbon-button-alignment">
+				<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip"
+					data-placement="bottom"
+					data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings."
+					data-html="true">
+					<i class="fa fa-refresh"></i>
+				</span>
+            </span>
+
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li>Trang chính</li>
+                <li>Bài viết</li>
+                <li>Nhóm sản phẩm</li>
+                <li><%= product_group ? 'Sửa' : 'Thêm mới' %></li>
+            </ol>
+            <!-- end breadcrumb -->
+
+        </div>
+        <!-- END RIBBON -->
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+
+            <!-- widget grid -->
+            <section id="widget-grid" class="">
+
+                <!-- row -->
+                <div class="row">
+
+                    <!-- NEW WIDGET START -->
+                    <article class="col-sm-12 col-md-12">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
+
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-check"></i> </span>
+                                <h2><%= product_group ? 'Sửa nhóm sản phẩm' : 'Thêm nhóm sản phẩm mới' %></h2>
+
+                            </header>
+
+                            <!-- widget div-->
+                            <div>
+
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <form id="wizard-1" novalidate="novalidate" method="POST">
+                                    <div class="widget-body">
+                                        <div class="row">  
+                                            <h3 class="text-center"> <strong><%= product_group ? 'Sửa nhóm sản phẩm' : 'Thêm nhóm sản phẩm mới' %></strong></h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 center-block" style="float:none">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-cube fa-lg fa-fw"></i></span>
+                                                        <select name="category" id="category"
+                                                        <%= product_group ? 'style=pointer-events:none readonly' : '' %>
+                                                            class="form-control input-lg">
+                                                            <option value="" <%=product_group ?
+                                                                ((product_group.type==='' ) ? 'selected' : ''
+                                                                ) : '' %>>---
+                                                                Danh mục ---</option>
+                                                            <option value="dien-thoai" <%=product_group ?
+                                                                ((product_group.type==='dien-thoai' )
+                                                                ? 'selected' : '' ) : '' %>>Điện thoại
+                                                            </option>
+                                                            <option value="may-tinh-bang" <%=product_group ?
+                                                                ((product_group.type==='may-tinh-bang' )
+                                                                ? 'selected' : '' ) : '' %>>Máy tính
+                                                                bảng
+                                                            </option>
+                                                            <option value="smart-watch" <%=product_group ?
+                                                                ((product_group.type==='smart-watch' ) ? 'selected'
+                                                                : '' ) : '' %>>Smart Watch</option>
+                                                            <option value="phu-kien" <%=product_group ?
+                                                                ((product_group.type==='phu-kien' )
+                                                                ? 'selected' : '' ) : '' %>>Phụ kiện
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 center-block" style="float:none">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-bars fa-lg fa-fw"></i></span>
+                                                        <select name="producer" id="producer"
+                                                            class="form-control input-lg" 
+                                                            style="pointer-events: none" readonly>
+                                                            <option value="" <%=product_group ?
+                                                                ((product_group.producer ==='' ) ? 'selected'
+                                                                : '' ) : '' %>>--- Nhà
+                                                                sản xuất ---</option>
+                                                            <option class="cateAP divHidden" value="Apple" <%=product_group ?
+                                                                ((product_group.producer ==='Apple' )
+                                                                ? 'selected' : '' ) : '' %>>Apple
+                                                            </option>
+                                                            <option class="cateAP_IP divHidden" value="Iphone" <%=product_group ?
+                                                                ((product_group.producer ==='Iphone' )
+                                                                ? 'selected' : '' ) : '' %>>Apple Iphone
+                                                            </option>
+                                                            <option class="cateAP_IPa divHidden" value="Ipad" <%=product_group ?
+                                                                ((product_group.producer ==='Ipad' )
+                                                                ? 'selected' : '' ) : '' %>>Apple Ipad
+                                                            </option>
+                                                            <option value="Samsung" <%=product_group ?
+                                                                ((product_group.producer ==='Samsung' )
+                                                                ? 'selected' : '' ) : '' %>>Samsung
+                                                            </option>
+                                                            <option value="Xiaomi" <%=product_group ?
+                                                                ((product_group.producer ==='Xiaomi' )
+                                                                ? 'selected' : '' ) : '' %>>Xiaomi
+                                                            </option>
+                                                            <option value="Oppo" <%=product_group ?
+                                                                ((product_group.producer ==='Oppo' )
+                                                                ? 'selected' : '' ) : '' %>>Oppo
+                                                            </option>
+                                                            <option value="LG" <%=product_group ?
+                                                                ((product_group.producer ==='LG' ) ? 'selected'
+                                                                : '' ) : '' %>>LG</option>
+                                                            <option value="Vsmart" <%=product_group ?
+                                                                ((product_group.producer ==='Vsmart' )
+                                                                ? 'selected' : '' ) : '' %>>Vsmart
+                                                            </option>
+                                                            <option value="Google" <%=product_group ?
+                                                                ((product_group.producer==='Google' )
+                                                                ? 'selected' : '' ) : '' %>>Google
+                                                            </option>
+                                                            <option value="Huawei" <%=product_group ?
+                                                                ((product_group.producer==='Huawei' )
+                                                                ? 'selected' : '' ) : '' %>>Huawei
+                                                            </option>
+                                                            <option value="OnePlus" <%=product_group ?
+                                                                ((product_group.producer==='OnePlus' )
+                                                                ? 'selected' : '' ) : '' %>>OnePlus
+                                                            </option>
+                                                            <option value="Lenovo" <%=product_group ?
+                                                                ((product_group.producer==='Lenovo' )
+                                                                ? 'selected' : '' ) : '' %>>Lenovo
+                                                            </option>
+                                                            <option value="Masstel" <%=product_group ?
+                                                                ((product_group.producer==='Masstel' )
+                                                                ? 'selected' : '' ) : '' %>>Masstel
+                                                            </option>
+                                                            <option value="Mobell" <%=product_group ?
+                                                                ((product_group.producer==='Mobell' )
+                                                                ? 'selected' : '' ) : '' %>>Mobell
+                                                            </option>
+                                                            <option value="Garmin" <%=product_group ?
+                                                                ((product_group.producer==='Garmin' )
+                                                                ? 'selected' : '' ) : '' %>>Garmin
+                                                            </option>
+                                                            <option value="Anker" <%=product_group ?
+                                                                ((product_group.producer==='Anker' )
+                                                                ? 'selected' : '' ) : '' %>>Anker
+                                                            </option>
+                                                            <option value="Xmobile" <%=product_group ?
+                                                                ((product_group.producer==='Xmobile' )
+                                                                ? 'selected' : '' ) : '' %>>Xmobile
+                                                            </option>
+                                                            <option value="Ava" <%=product_group ?
+                                                                ((product_group.producer==='Ava' )
+                                                                ? 'selected' : '' ) : '' %>>Ava
+                                                            </option>
+                                                            <option value="Evalu" <%=product_group ?
+                                                                ((product_group.producer==='Evalu' )
+                                                                ? 'selected' : '' ) : '' %>>Evalu
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 center-block" style="float:none">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-sitemap fa-lg fa-fw"></i>
+                                                        </span>
+                                                        <input class="form-control input-lg name_vieInput" placeholder="Tên nhóm sản phẩm" type="text" name="productGrName" id="productGrName" value="<%= product_group ? product_group.groupName : '' %>">
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h5>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" name="checkbox-isKichhoat"
+                                                                id="checkbox-isKichhoat" <%= product_group ? (product_group.status === true ? 'checked' : '') : 'checked' %>>
+                                                            <i></i>Kích hoạt?
+                                                        </label>
+                                                    </h5>
+                                                </div>
+                                                <% if (error) { %> 
+                                                <div class="form-group">
+                                                    <div class="alert alert-danger fade in">
+                                                        <button class="close" data-dismiss="alert">×</button>
+                                                        <i class="fa-fw fa fa-times"></i>
+                                                        <strong>Lỗi!</strong> <%= error %>
+                                                    </div>
+                                                </div>
+                                                <% }; %> 
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <ul class="pager wizard no-margin">
+                                                        <li class="col text-center next">
+                                                            <input class="btn btn-primary btn-md" type="submit" value="Lưu">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                    <!-- WIDGET END -->
+
+                </div>
+                <!-- end row -->
+
+            </section>
+            <!-- end widget grid -->
+        </div>
+        <!-- END MAIN CONTENT -->
+
+    </div>
+    <!-- END MAIN PANEL -->
+
+<script>
+    $( document ).ready(function() {
+        var action = getParameterByName('action');
+        if (action && action == 'error') {
+            alert('Lỗi! Tên nhóm sản phẩm đã tồn tại.')            
+        }
+    });
+</script>
+<script type="text/javascript">
+	$('#category').on('change', function () {
+		if ($('#category').val() != '') {
+            $("#producer").attr('readonly', false);
+            $("#producer").attr('style', 'pointer-events:');
+			$('#producer').attr('selectedIndex', 0);
+		}
+		else {
+            $('#wizard-1')[0].reset();
+            $("#producer").attr('readonly', true);
+            $("#producer").attr('style', 'pointer-events:none');
+		}
+	});
+
+	$(document).ready(function() {
+		$('#category').on('change', function() {
+			$(".cateAP").addClass("divHidden");
+			$(".cateAP_IP").addClass("divHidden");
+			$(".cateAP_IPa").addClass("divHidden");
+
+			if ($('#category option:selected').val() === 'dien-thoai') {
+				$(".cateAP_IP").removeClass("divHidden");
+			}
+			else if ($('#category option:selected').val() === 'may-tinh-bang') {
+				$(".cateAP_IPa").removeClass("divHidden");
+			} else {
+				$(".cateAP").removeClass("divHidden");
+            }
+            
+
+			var cateSelected = $('#category option:selected').val();
+			var cateProducerSelected = $('#producer option:selected').val();
+			var catePGrSelected = $('#productGroup option:selected').val();
+			$('#wizard-1')[0].reset();
+			$('#category').val(cateSelected);
+			$('#producer').val(cateProducerSelected);
+		});
+
+		$('#producer').on("change", function () {
+			var cateSelected = $('#category option:selected').val();
+			var cateProducerSelected = $('#producer option:selected').val();
+			var catePGrSelected = $('#productGroup option:selected').val();
+			$('#wizard-1')[0].reset();
+			$('#category').val(cateSelected);
+			$('#producer').val(cateProducerSelected);
+		});
+	});
+</script>
+
+<%- include('footer') -%>

@@ -1,0 +1,789 @@
+<%- include('header', { title: `${ titleCate + ' ' + title}`, titleSub : `${type}` }); -%>
+    <div class="container content-grid">
+        <div class="row">
+            <div class="span16 breadcrumbs-grid">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/<%= type %>">
+                            <%= titleCate %>
+                        </a>
+                        <span>›</span>
+                    </li>
+                    <li>
+                        <a href="/<%= type + '-' + product.producer.toLowerCase() %>">
+                            <%= titleCate + ' ' + product.producer %>
+                        </a>
+                    </li>
+                </ul>
+                <div class="view_product_title">
+                    <h1 class="mainbox-title" style=" padding-bottom: 0; ">
+                        <%= titleCate + ' ' + product.name %>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12 view-detail-product">
+                <!-- Inline script moved to the bottom of the page -->
+                <div class="product-main-info">
+                    <div class="clearfix">
+                        <div id="thong_tin_san_pham">
+                            <div class="row">
+                                <div class="product-block__img-wrapper">
+                                    <div class="image-wrap product_view_image">
+                                        <div class="image-border center cm-reload" id="product_images_update">
+                                            <div class="border-image-wrap cm-preview-wrapper">
+                                                <a class="image-popup-no-margins cm-image-previewer cm-previewer previewer"
+                                                    href="/uploads/<%= product.extend_products[0].path_image %>"
+                                                    title="<%= product.name %>">
+                                                    <img class="pict"
+                                                        src="/uploads/<%= product.extend_products[0].path_image %>"
+                                                        width="480" height="480"
+                                                        alt="<%= product.extend_products[0].color %>"
+                                                        title="<%= product.extend_products[0].color %>">
+                                                </a>
+                                                <p></p>
+                                            </div>
+                                            <% for (let i=0; i<product.extend_products.length;i++){ %> 
+                                            <div class="product-thumbnails center">
+                                                <div class="cm-image-gallery float-left">
+                                                    <a class="cm-thumbnails-mini active thumbnails-item
+                                                    image-popup-no-margins cm-image-previewer cm-previewer previewer"
+                                                    href="/uploads/<%= product.extend_products[i].path_image %>"
+                                                    title="<%= product.name + ' màu ' + product.extend_products[i].color %>">
+                                                        <img class="pict"
+                                                            src="/uploads/<%= product.extend_products[i].path_image %>"
+                                                            width="50" height="50"
+                                                            alt="<%= product.extend_products[i].color %>"
+                                                            title="<%= product.extend_products[i].color %>">
+                                                        <span>
+                                                            <%= product.extend_products[i].color %>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </div> 
+                                            <% }; %> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6 product_view_main ">
+                                    <div class="product-main-info">
+
+                                            <div class="main_info_content clearfix">
+                                                <div class="main_info_left">
+                                                    <div
+                                                        class="prices-container price-wrap clearfix product-detail-price">
+                                                        <div class="float-left product-prices">
+                                                            <div class="actual-price">
+                                                                <span class="cm-reload price-update" id="price_update">
+                                                                    <span class="price" id="line_discounted_price">
+                                                                        <span id="sec_discounted_price"
+                                                                            class="price-num">
+                                                                            <%= product.price.toLocaleString('it-IT') %>
+                                                                        </span><span class="price-num"
+                                                                            style=" text-decoration: underline; "><sup style="font-size:20px">₫</sup></span>
+                                                                    </span>
+                                                                    <!--price_update-->
+                                                                </span>
+                                                                <% if (product.isTraGop===true) { %>
+                                                                    <span class="lab_tragop_o">Trả góp 0%</span>
+                                                                    <% } %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% if (productGroup.length >= 1) { %>
+                                                    <div class="options-wrapper">
+                                                        <!--333-->
+                                                        <div class="cm-reload" id="product_options_update">
+                                                            <div class="cm-picker-product-options" id="opt">
+                                                                <div class="control-group product-list-field clearfix "
+                                                                    id="opt">
+                                                                    <label for="option" class="option_title ">
+                                                                        Bạn đang xem phiên bản
+                                                                        <strong>
+                                                                            <%= (isSameRam ? '' : (product.ram + 'GB/')) + product.storage + 'GB'%>
+                                                                        </strong>:&nbsp;</label>
+                                                                    <ul id="option_group" class="option-radio-group">
+                                                                        <div id="scroll_list_storage">
+                                                                            <div class="MS-content">
+                                                                                <div class="item">
+                                                                                    <li style="float:none!important;">
+                                                                                        <label
+                                                                                            class="option-items selected_variant_option active">
+                                                                                            <a class="option_variant_beta"
+                                                                                                href="<%= product.path_url %>">
+                                                                                                <i class="icon-ok"></i>
+                                                                                                <%= (isSameRam ? '' : (product.ram + 'GB/')) + product.storage + 'GB'%>
+                                                                                                    <span
+                                                                                                        class="option_price-num">
+                                                                                                        <span>
+                                                                                                            <%= product.price.toLocaleString('it-IT')
+                                                                                                                %>
+                                                                                                        </span><sup style="font-size:smaller">₫</sup>
+                                                                                                    </span>
+                                                                                            </a>
+                                                                                        </label>
+                                                                                    </li>
+                                                                                </div>
+                                                                                <% productGroup.forEach(function(productGr, index){ %>
+                                                                                    <div class="item">
+                                                                                        <li
+                                                                                            style="float:none!important;">
+                                                                                            <label class="option-items">
+                                                                                                <a class="option_variant_beta"
+                                                                                                    href="<%= productGr.path_url %>">
+                                                                                                    <i class="lua_chon"></i>
+                                                                                                        <%= (isSameRam ? '' : (productGr.ram + 'GB/')) + productGr.storage + 'GB'%>
+                                                                                                        <span
+                                                                                                            class="option_price-num">
+                                                                                                            <span>
+                                                                                                                <%= productGr.price.toLocaleString('it-IT')
+                                                                                                                    %>
+                                                                                                            </span><sup style="font-size:smaller">₫</sup>
+                                                                                                        </span>
+                                                                                                </a>
+                                                                                            </label>
+                                                                                        </li>
+                                                                                    </div>
+                                                                                    <% }); %>
+                                                                            </div>
+                                                                            <% if (productGroup.length > 1) { %>
+                                                                            <div class="MS-controls">
+                                                                                <a class="MS-left"><i
+                                                                                        class="fa fa-chevron-left fa-lg"
+                                                                                        aria-hidden="true"></i></a>
+                                                                                <a class="MS-right"><i
+                                                                                        class="fa fa-chevron-right fa-lg"
+                                                                                        aria-hidden="true"></i></a>
+                                                                            </div>
+                                                                            <% }; %>
+                                                                        </div>
+                                                                    </ul>
+                                                                </div>
+                                                            </div><!-- Inline script moved to the bottom of the page -->
+                                                            <style>
+                                                                span.option_price-num {
+                                                                    display: block;
+                                                                    color: #d0021b;
+                                                                    margin-top: 3px;
+                                                                }
+
+                                                                span.option_price-num * {
+                                                                    color: #d0021b;
+                                                                }
+                                                            </style>
+                                                            <!--product_options_update-->
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                    <div class="area_promotion zero">
+                                                        <strong data-count="3">Khuyến mãi & Ưu đãi <i>Khuyến mãi dự kiến
+                                                                áp dụng đến hết tháng 3/2021</i></strong>
+                                                        <div class="infopr">
+                                                            <span>
+                                                                Pin sạc dự phòng giảm 30% khi mua kèm. <a
+                                                                    href="/tin-tuc/pin-sac-du-phong-uu-dai-1294565"
+                                                                    target="_blank">(click xem chi tiết)</a>
+                                                            </span>
+                                                            <span>
+                                                                Mua Đồng hồ thời trang giảm 40% (không kèm KM khác)
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail_product-block__button clearfix">
+                                                        <div class="buttons-container">
+                                                            <div class="cm-reload " id="add_to_cart_update">
+                                                                <div class="buttons-container" id="cart_add_block">
+                                                                    <button id="button_cart_buyNow" type="button"
+                                                                        class="btn-add-to-cart">Mua Ngay
+                                                                        <span>Giao hàng tận nơi hoặc lấy tại cửa hàng</span>
+                                                                    </button>
+                                                                    <a class="icon_yeucautuvan" rel="nofollow"
+                                                                        href="/mua-tra-gop?product_id=<%= product.id %>">Mua
+                                                                        Trả Góp 0%<span>Thủ Tục Đơn Giản</span>
+                                                                    </a>
+                                                                </div>
+                                                                <!--add_to_cart_update-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--main_info_left-->
+                                                </div>
+                                                <!--main_info_content-->
+                                            </div>
+                                            <p style="padding-top: 8px;text-align: center;">Tư vấn - Mua hàng: <a
+                                                    href="tel:0989898989" style=" color: #4a90e2">0989.89.89.89</a>
+                                                (8:30 - 21:00)
+                                            </p>
+                                            
+                                    </div>
+                                    <ul class="popup-tabs hidden">
+                                        <div id="content_features" class="hidden" title="Cấu hình <%= product.name %> "
+                                            data-ca-keep-in-place="true">
+                                            <% if (type === 'dien-thoai' || type === 'may-tinh-bang'){ %>
+                                            <p class="subheader">Màn hình</p>
+                                            <div class="control-group"> <label>Loại màn hình:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.screen %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Camera sau</p>
+                                            <div class="control-group"> <label>Camera sau:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.cam_behind %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Camera trước</p>
+                                            <div class="control-group"> <label>Camera trước:</label>
+                                                <div class="feature-value">
+                                                    <%= product.cam_front %>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Hệ điều hành - CPU</p>
+                                            <div class="control-group"> <label>Hệ điều hành:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.operation %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>CPU:</label>
+                                                <div class="feature-value">
+                                                    <%= product.cpu %>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Bộ nhớ &amp; Lưu trữ</p>
+                                            <div class="control-group"> <label>RAM:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.ram %> GB</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>Bộ nhớ trong (Rom):</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.storage %> GB</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Kết Nối</p>
+                                            <div class="control-group"> <label>Thẻ sim:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.sim %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Thông tin pin</p>
+                                            <div class="control-group"> <label>Dung lượng pin:</label>
+                                                <div class="feature-value">
+                                                    <%= product.pin %>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Tiện ích</p>
+                                            <div class="control-group"> <label>Nghe nhạc:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">Lossless, Midi, MP3, WAV, WMA9,
+                                                        WMA, AAC, AAC+, AAC++, eAAC+</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>Xem phim:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">3GP, MP4, AVI, WMV, H.263,
+                                                        H.264(MPEG4-AVC)</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>Ghi âm:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">Có</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <% if (type === 'may-tinh-bang') { %>
+                                                <div class="control-group"> <label>Đàm thoại:</label>
+                                                    <div class="feature-value">
+                                                        <ul class="no-markers no-margin"><%= product.conversation %></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group"> <label>Kết nối mạng:</label>
+                                                    <div class="feature-value">
+                                                        <ul class="no-markers no-margin"><%= product.network_connection %></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                            <div class="control-group"> <label>Radio:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">Tùy dòng</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <% }; %>
+                                            <% if (type === 'smart-watch'){ %>
+                                            <p class="subheader">Màn hình</p>
+                                            <div class="control-group"> <label>Công nghệ màn hình:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.productScreenSW %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>Kích thước màn hình:</label>
+                                                <div class="feature-value">
+                                                    <%= product.screen_size %>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>Chất liệu mặt:</label>
+                                                <div class="feature-value">
+                                                    <%= product.face_material %>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>Đường kính mặt:</label>
+                                                <div class="feature-value">
+                                                    <%= product.face_diameter %>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Cấu hình</p>
+                                            <div class="control-group"> <label>Hệ điều hành:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.OS_SW %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="control-group"> <label>Kết nối được với hệ điều hành:</label>
+                                                <div class="feature-value">
+                                                    <%= product.connect_os %>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Tiện ích & kết nối</p>
+                                            <div class="control-group"> <label>Tính năng cho sức khỏe:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.health_monitor %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Pin</p>
+                                            <div class="control-group"> <label>Thời gian sử dụng pin:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.battery_life_time %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="subheader">Thông tin khác</p>
+                                            <div class="control-group"> <label>Ngôn ngữ:</label>
+                                                <div class="feature-value">
+                                                    <ul class="no-markers no-margin">
+                                                        <%= product.language %>
+                                                            </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <% }; %>
+                                        </div>
+                                        <div id="chinhsachbaohanh" class="hidden" title="CHÍNH SÁCH BẢO HÀNH, ĐỔI TRẢ"
+                                            data-ca-keep-in-place="true">
+                                            <div class="ctW"><span class="tlt">BẢO HÀNH CHÍNH HÃNG:</span>
+                                                <span>Thân máy 12 tháng, pin 12 tháng, sạc 6 tháng, tai nghe
+                                                    6 tháng - <a class="pWarr" href="/bao-hanh/oppo" target="_blank">Xem
+                                                        điểm bảo hành OPPO</a></span>
+                                                <div class="cs">
+                                                    <div><strong><span style="font-size:14px;">CHÍNH SÁCH
+                                                                ĐỔI TRẢ:</span></strong></div>&nbsp;<table border="1"
+                                                        cellpadding="0" cellspacing="0" style="width:695px;"
+                                                        width="696">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width:102px;">&nbsp;</td>
+                                                                <td style="width: 282px; text-align: center;">
+                                                                    <strong>THÁNG 1</strong>
+                                                                </td>
+                                                                <td style="width: 312px; text-align: center;">
+                                                                    <strong>THÁNG 2 - 12</strong>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width:102px;height:130px;">
+                                                                    <strong>SẢN PHẨM<br>LỖI DO NHÀ<br>SẢN
+                                                                        XUẤT</strong>
+                                                                </td>
+                                                                <td style="width:282px;height:130px;">
+                                                                    <strong>ĐỔI SẢN PHẨM HOẶC HOÀN
+                                                                        TIỀN:</strong><br>&nbsp; -1 đổi 1
+                                                                    hoặc đổi sản phẩm khác trong trường hợp
+                                                                    hết hàng<br>&nbsp; -Hoặc hoàn tiền mất
+                                                                    phí 20%<br>&nbsp;
+                                                                </td>
+                                                                <td style="width:312px;height:130px;">
+                                                                    <strong>GỬI BẢO HÀNH:</strong><br>&nbsp;
+                                                                    -Hỗ trợ sản phẩm dùng trong thời gian
+                                                                    chờ bảo hành (giá trị thấp
+                                                                    hơn)<br>&nbsp; Hoặc hoàn tiền mất phí,
+                                                                    thêm 5%/tháng so với tháng thứ 1 (20%)
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width:102px;height:61px;">
+                                                                    <strong>SẢN PHẨM<br>KHÔNG LỖI</strong>
+                                                                </td>
+                                                                <td style="width:282px;height:61px;">Hoàn
+                                                                    tiền mất phí 20%</td>
+                                                                <td style="width:312px;height:61px;">Hoàn
+                                                                    tiền mất phí, thêm 5%/tháng so với tháng
+                                                                    thứ 1 (20%)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width:102px;height:65px;">
+                                                                    <strong>SẢN PHẨM<br>LỖI DO<br>NGƯỜI
+                                                                        DÙNG</strong>
+                                                                </td>
+                                                                <td colspan="2" style="width:595px;height:65px;">
+                                                                    <strong>KHÔNG BẢO HÀNH, ĐỔI
+                                                                        TRẢ.</strong> Thegioididong.com hỗ
+                                                                    trợ chuyển TTBH hãng, khách hàng chịu
+                                                                    phí sửa chữa.
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                    <!--product_view_main-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-details"></div>
+            </div>
+            <div class="span4 main-right-span4 silder-view-product">
+                <div class=" block_cam_ket">
+                    <div class="view-product-note clearfix">
+                        <div class="view-product-question">
+                            <% if (type === 'dien-thoai' || type === 'may-tinh-bang'){ %> 
+                            <div class="content-question">
+                                <ul>
+                                    <li>Tình trạng: <strong> Mới 100%</strong></li>
+                                    <li>Phụ kiện gồm: <a data-ca-image-id="preview[phukien_link]"
+                                            class="cm-image-previewer cm-previewer previewer"
+                                            href="/images/detailed/38/khui-hop_05cw-4u.jpg">Thân
+                                            máy, Hộp, Cáp, Cây lấy sim, Sách hướng dẫn</a> </li>
+                                    <li>Bảo hành<strong> 12 tháng</strong>&nbsp;theo chính sách của nhà sản xuất tại hệ
+                                        thống ủy quyền toàn quốc.</li>
+                                    <li>Bao test 1 đổi 1 trong <strong>12 tháng</strong> bao gồm nguồn và màn hình</li>
+                                    <li>Giao hàng tận nơi trên toàn quốc. Ship COD - Giao hàng</li>
+                                </ul>
+                            </div>
+                            <div class="content-block-hotline" role="alert">
+                                <h6>CHI TIẾT GÓI TRẢ GÓP</h6>
+                                <ul>
+                                    <li><a class="link_tragop" rel="nofollow"
+                                            href="/mua-tra-gop?product_id=<%= product.id %>">Công ty
+                                            tài
+                                            chính:</a> CMND + GPLX</li>
+                                    <li><a class="link_tragop" rel="nofollow"
+                                            href="/mua-tra-gop?product_id=<%= product.id %>">Thẻ Visa,
+                                            Master:</a> nhận máy ngay, không xét duyệt hồ sơ.</li>
+                                </ul>
+                            </div>
+                            <% }; %>
+                            <% if (type === 'smart-watch'){ %> 
+                                <div class="content-question">
+                                    <ul>
+                                        <li>Bộ sản phẩm gồm: <a data-ca-image-id="preview[phukien_link]"
+                                                class="cm-image-previewer cm-previewer previewer"
+                                                href="/images/detailed/38/khui-hop_05cw-4u.jpg">Hộp, Sạc, Sách hướng dẫn</a> </li>
+                                        <li>Bảo hành<strong> 12 tháng</strong>&nbsp;theo chính sách của nhà sản xuất tại hệ
+                                            thống ủy quyền toàn quốc.</li>
+                                        <li>Bao test 1 đổi 1 trong <strong>1 tháng</strong> với sản phẩm lỗi</li>
+                                        <li>Giao hàng tận nơi trên toàn quốc. Ship COD - Giao hàng</li>
+                                    </ul>
+                                </div>
+                            <% }; %>
+                            <% if (type === 'phu-kien'){ %> 
+                                <div class="content-question">
+                                    <ul>
+                                        <li>Bộ sản phẩm gồm: <a data-ca-image-id="preview[phukien_link]"
+                                                class="cm-image-previewer cm-previewer previewer"
+                                                href="/images/detailed/38/khui-hop_05cw-4u.jpg">Đầy đủ phụ kiện chính hãng</a> </li>
+                                        <li>Bảo hành<strong> 12 tháng</strong>&nbsp;theo chính sách của nhà sản xuất tại hệ
+                                            thống ủy quyền toàn quốc.</li>
+                                        <li>Giao hàng tận nơi trên toàn quốc. Ship COD - Giao hàng</li>
+                                    </ul>
+                                </div>
+                            <% }; %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span16 view-content-product_tab">
+                <div class="row">
+                    <div class="span11 ">
+                        <div class=" tab_product_view">
+                            <h2 style=" font-size: 18px; font-weight: normal; margin-bottom: 15px;">
+                            <%= type === 'phu-kien' ? 'Giới thiệu' : 'Đánh giá' %> <%= product.name %>
+                            </h2>
+                            <div id="content_description" class="wysiwyg-content">
+                                <div>
+                                    <article class="area_article" style=" height: 600px;">
+                                        <%- product.describe_content %>
+                                    </article>
+                                    <p class="show-more"><span class="readmore">Đọc thêm</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebox-wrapper-nhansam">
+                            <h3 class="sidebox-title_nhansam"> <span>Sản phẩm cùng loại</span> </h3>
+                            <div class="sidebox-body_nhansam">
+                                <div class="grid_product_list_column clearfix">
+                                    <% products.forEach(function(product, index){ %>
+                                        <div class="product_list_column4">
+                                            <div class="grid-list__item">
+                                                <div class="grid-list__image">
+                                                    <% if(product.isHangCongTy==true){ %>
+                                                        <span class="label_cty">Công ty</span>
+                                                        <% } %>
+                                                            <% if(product.isTraGop==true){ %>
+                                                                <label class="label_installment">Trả góp 0%</label>
+                                                                <% }else { %>
+                                                                    <span class="sticker_mau_4">Siêu giảm giá</span>
+                                                                    <% } %>
+                                                                        <a href="/<%= product.type %>/<%= product.path_url %>"
+                                                                            title="<%= product.name %>">
+                                                                            <img class="ty-pict cm-image fade-in-on-load"
+                                                                                alt="<%= product.name %>"
+                                                                                title="<%= product.name %>"
+                                                                                src="/uploads/<%= product.extend_products[0].path_image %>"
+                                                                                width="180" height="180">
+                                                                        </a>
+                                                </div>
+                                                <div class="grid-list__item-name">
+                                                    <a href="/<%= product.type %>/<%= product.path_url %>"
+                                                        class="product-title"><%= product.name %>
+                                                    </a>
+                                                </div>
+                                                <div class="grid-list__price"> <span class="cm-reload price-update"
+                                                        id="price_update">
+                                                        <span class="price" id="line_discounted_price">
+                                                            <span id="sec_discounted_price" class="price-num">
+                                                                <%= parseInt(product.price).toLocaleString('it-IT') %><span class="price-num"><sup style="font-size:smaller">₫</sup>
+                                                                </span>
+                                                            </span>
+                                                        </span>
+                                                        <!--price_update-->
+                                                    </span> <span class="cm-reload" id="old_price_update">
+                                                        <!--old_price_update-->
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="span5 ">
+                        <div class="view-product_features view-product-question">
+                            <h3>Thông số sản phẩm</h3>
+                            <div class="content-product_features">
+                                <% if (type === 'dien-thoai' || type === 'may-tinh-bang'){ %> 
+                                <div class="features-list-item"><label>Màn hình: </label><span>
+                                        <%= product.screen %>
+                                    </span></div>
+                                <div class="features-list-item"><label>Hệ điều hành: </label><span>
+                                        <%= product.operation %>
+                                    </span></div>
+                                <div class="features-list-item"><label>Camera sau: </label><span>
+                                        <%= product.cam_behind %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Camera trước: </label><span>
+                                        <%= product.cam_front %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>CPU: </label><span>
+                                        <%= product.cpu %>
+                                    </span></div>
+                                <div class="features-list-item"><label>RAM: </label><span>
+                                        <%= product.ram %> GB
+                                    </span></div>
+                                <div class="features-list-item"><label>Bộ nhớ trong: </label><span>
+                                        <%= product.storage %> GB
+                                    </span></div>
+                                <div class="features-list-item"><label>Thẻ SIM: </label><span>
+                                        <%= product.sim %>
+                                    </span></div>
+                                <% if (type === 'may-tinh-bang') { %>
+                                    <div class="features-list-item"><label>Đàm thoại: </label><span>
+                                        <%= product.conversation %>
+                                        </span>
+                                    </div>
+                                    <div class="features-list-item"><label>Kết nối mạng: </label><span>
+                                        <%= product.network_connection %>
+                                        </span>
+                                    </div>
+                                <% } %>
+                                <div class="features-list-item"><label>Dung lượng pin: </label><span>
+                                        <%= product.pin %>
+                                    </span>
+                                </div>
+                                <% }; %>
+                                <% if (type === 'smart-watch'){ %>
+                                <div class="features-list-item"><label>Công nghệ màn hình: </label><span>
+                                        <%= product.productScreenSW %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Kích thước màn hình: </label><span>
+                                        <%= product.screen_size %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Thời gian sử dụng pin: </label><span>
+                                        <%= product.battery_life_time %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Hệ điều hành: </label><span>
+                                        <%= product.OS_SW %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Kết nối với hệ điều hành: </label><span>
+                                    <%= product.connect_os %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Chất liệu mặt: </label><span>
+                                        <%= product.face_material %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Đường kính mặt: </label><span>
+                                        <%= product.face_diameter %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Kết nối: </label><span>
+                                        <%= product.connect %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Ngôn ngữ: </label><span>
+                                        <%= product.language %>
+                                    </span>
+                                </div>
+                                <div class="features-list-item"><label>Theo dõi sức khỏe: </label><span>
+                                        <%= product.health_monitor %>
+                                    </span>
+                                </div>              
+                                <% }; %>
+                                <% if (type === 'phu-kien') { %>
+                                    <div class="features-list-item"><label>Chức năng: </label><span>
+                                        <%= product.functionP %>
+                                        </span>
+                                    </div>
+                                    <div class="features-list-item"><label>Đầu ra: </label><span>
+                                        <%= product.output %>
+                                        </span>
+                                    </div>
+                                    <div class="features-list-item"><label>Công nghệ/Tiện ích: </label><span>
+                                        <%= product.tech_util %>
+                                        </span>
+                                    </div>
+                                    <div class="features-list-item"><label>Độ dài dây: </label><span>
+                                        <%= product.wire_length %>
+                                        </span>
+                                    </div>
+                                    <div class="features-list-item"><label>Thương hiệu của: </label><span>
+                                        <%= product.trademark %>
+                                        </span>
+                                    </div>
+                                    <div class="features-list-item"><label>Sản xuất tại: </label><span>
+                                        <%= product.made_in %>
+                                        </span>
+                                    </div>
+                                <% } %>
+                                <% if (type === 'dien-thoai' || type === 'may-tinh-bang' || type === 'smart-watch'){ %> 
+                                <p></p> <a id="features" class="cm-dialog-opener" data-ca-target-id="content_features"
+                                    rel="nofollow">Xem cấu hình chi tiết</a>
+                                <% }; %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="buyNow_popup">
+        <div class="popup-detail">
+            <div class="bg-detail"></div>
+            <div class="choose-promo isActive">
+                <div class="close-popup"><i></i></div>
+                <div class="namePro">
+                    <span class="namePro__product-name"><%= titleCate + ' ' + product.name %></span>
+                    <span><%= product.price.toLocaleString('it-IT') %><sup style="font-size:smaller">₫</sup>
+                        <strike><%= product.price.toLocaleString('it-IT') %><sup style="font-size:smaller">₫</sup></strike>
+                    </span>
+                </div>
+                <div class="choose-colorPro"><strong>Chọn màu:</strong>
+                    <ul>
+                        <% for (let i=0; i<product.extend_products.length;i++){ %> 
+                        <li class="" data-exProductId="<%= product.extend_products[i].id %>" 
+                            data-amount="<%= product.extend_products[i].amount %>">
+                            <div class="imgPro"><span class="imgPro__helper"></span><img
+                                    src="/uploads/<%= product.extend_products[i].path_image %>">
+                            </div><i class="cartnew-choose"></i><span><%= product.extend_products[i].color %></span>
+                        </li>
+                        <% }; %> 
+                    </ul>
+                    <div class="choose-amount"><span>Chọn số lượng: </span>
+                        <div class="choosenumber">
+                            <div class="minus orders" style="pointer-events: none;"><i
+                                    style="background-color: rgb(204, 204, 204);"></i></div>
+                            <div class="number orders">1</div>
+                            <div class="plus orders" style="pointer-events: all;"><i
+                                    style="background-color: rgb(40, 138, 214);"></i><i
+                                    style="background-color: rgb(40, 138, 214);"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="orderCheck"></div>
+                <div style="padding:15px 0px 0px">
+                    <button class="ordered" type="button">Đặt mua</button>
+                    <a href="/cart" target="_blank" class="seecart">Xem giỏ hàng</a>
+                </div><input id="tloc" value="<%= cookieCart %>" type="hidden" disabled>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/multislider.min.js"></script>
+    <script>
+        if (`<%= productGroup.length %>` > 1) {
+            $('#scroll_list_storage').multislider({
+                duration: 850,
+                interval: 4000
+            });
+        } else {
+            $('#scroll_list_storage').multislider({
+                duration: 0,
+                interval: 0
+            });
+        }
+    </script>
+<%- include('footer') -%>

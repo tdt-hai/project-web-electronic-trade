@@ -1,0 +1,234 @@
+<%- include('header', { title: 'Giỏ hàng' , titleSub: 'cart' }); -%>
+    <div class="container content-grid">
+        <div class="row">
+            <div class="span16 main-content-grid">
+                <div class="main-cart-view">
+                    <%  if (!jscartAll || jscartAll.length === 0) { %> 
+                    <div class="main-cart-content">
+                        <p class="no-items"><i class="cartnew-empty"></i><br><br>
+                            Không có sản phẩm nào trong giỏ hàng!</p>
+                        <div class="buttons-container wrap text-center">
+                            <a href="/" class="continue_shopping">
+                                Mua thêm sản phẩm</a>
+                        </div>
+                    </div>
+                    <% } else { %>
+                    <h1 style=" text-align: left; margin: 30px 0 20px; font-size: 16px; color: #E61E14; font-weight: normal; ">
+                        THÔNG TIN ĐẶT HÀNG
+                    </h1>
+                    <div class="main-cart-content">
+                        <form name="checkout_form" class="cm-check-changes cm-ajax cm-ajax-full-render cm-processed-form"
+                            action="" method="POST" enctype="multipart/form-data">
+                            <div>
+                                <div class="mainbox-cart-body">
+                                    <div id="cart_items">
+                                        <div class="order-head">
+                                            <div class="heading-cart"> <i></i> Giỏ hàng của bạn (có <strong><%= jscartAll.length %></strong>
+                                                sản phẩm) </div>
+                                            <div class="more-buy"><a href="/">Tiếp tục mua hàng</a></div>
+                                        </div>
+                                        <table id="showCart" class="table top table-width">
+                                            <tbody>
+                                                <% jscartAll.forEach(function(product, index){ %>                                              
+                                                <tr data-exProductId="<%= product.exProductId %>">
+                                                    <td class="product-image-cell">
+                                                        <div class="product-image"> 
+                                                            <a href="/<%= product.productType + '/' + product.path_url %>" target="_blank">
+                                                                <img class="pict"
+                                                                    src="/uploads/<%= product.path_image %>"
+                                                                    width="100" height="100"
+                                                                    alt="<%= product.productName %>"
+                                                                    title="<%= product.productName %>">
+                                                            </a>
+                                                            <a class="icon-delete-big" data-exProductId="<%= product.exProductId %>" 
+                                                                onclick="deleteProduct(this)"
+                                                                type="button" rel="nofollow" title="Xóa sản phẩm">
+                                                                <i class="icon-trashcan"></i> Xóa
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-description"> 
+                                                        <a href="/<%= product.productType + '/' + product.path_url %>"
+                                                            class="product-title"><%= product.productName %>
+                                                        </a>
+                                                        <div class="cm-reload-3570050527 options">
+                                                            <div class="cm-picker-product-options">
+                                                                <div class="control-group product-list-field clearfix lab-option-color"> 
+                                                                    <label for="option_cart" class="option_title"> Bạn chọn màu 
+                                                                        <strong><%= product.color %></strong>:&nbsp;
+                                                                    </label>
+                                                                    <ul id="option_cart_group" class="option-radio-group">
+                                                                        <% product.productSame.forEach(function(e, index){ %> 
+                                                                        <li data-exProductId="<%= e.exProductId %>">
+                                                                            <label class="option-items option_color selected_variant_option"
+                                                                                style="background: #111111"> 
+                                                                                <input type="radio" class="radio" <%= (product.color === e.color) ? 'checked' : '' %>>
+                                                                                <i class="<%= (product.color === e.color) ? 'icon-ok' : 'lua_chon' %>"></i> <%= e.color %></strong> 
+                                                                                    <span class="option_price-num">
+                                                                                        <span><%= parseInt(product.price).toLocaleString('it-IT') %><sup style="font-size:smaller">₫</sup>
+                                                                                        </span>
+                                                                                    </span> 
+                                                                            </label>
+                                                                        </li>
+                                                                        <% }); %>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="choose-amount"><span>Chọn số lượng: </span>
+                                                            <div class="choosenumber">
+                                                                <div class="minus <%= product.qty > 1 ? 'allow-clicks' : 'avoid-clicks' %>" onclick="minusChange(this)" data-exProductId="<%= product.exProductId %>"><i class="<%= product.qty > 1 ? 'showSign' : 'hideSign' %>"></i></div>
+                                                                <div class="number exProductId_<%= product.exProductId %>"><%= product.qty %></div>
+                                                                <div class="plus <%= product.qty >= 5 ? 'avoid-clicks' : 'allow-clicks' %>" onclick="plusChange(this)" data-exProductId="<%= product.exProductId %>"><i class="<%= product.qty >= 5 ? 'hideSign' : 'showSign' %>"></i><i class="<%= product.qty >= 5 ? 'hideSign' : 'showSign' %>"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="statistic-list-wrap clear">
+                            <div class="checkout-totals clearfix" id="checkout_totals">
+                                <ul class="statistic-list">
+                                    <li class="statistic-list-subtotal"> <span class="checkout-item-title">Tổng tiền:
+                                        </span>
+                                        <span class="checkout-item-value total">
+                                            <span><%= totalMoney.toLocaleString('it-IT') %></span><sup style="font-size:smaller">₫</sup>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <!--checkout_totals-->
+                            </div>
+                        </div>
+                        <div class="main-checkout-view">
+                            <form name="checkout_form" class="cm-processed-form" method="POST">
+                                <h2 class="subheader">Thông tin đặt hàng</h2>
+                                <div class="clearfix" data-ct-address="billing-address">
+                                    <div class="checkout-inside-block">
+                                        <div class="clearfix">
+                                            <div class="control-group profile-field-wrap billing-email"> <label
+                                                    for="elm_name" class="cm-profile-field cm-required hidden ">Họ và
+                                                    Tên</label> <input type="text" id="elm_name"
+                                                    name="user_data[b_firstname]" size="32" value=""
+                                                    class="input-text cm-skip-avail-switch cm_cart_name"
+                                                    placeholder="Họ và Tên" required> </div>
+                                            <div class="control-group profile-field-wrap billing-first-name "> <label
+                                                    for="elm_phone"
+                                                    class="cm-profile-field cm-required cm-phone hidden">Số điện
+                                                    thoại</label> <input type="text" id="elm_phone"
+                                                    name="user_data[phone]" size="32" value=""
+                                                    class="input-text cm-skip-avail-switch cm_cart_phone"
+                                                    placeholder="Số điện thoại" required> </div>
+                                            <div class="control-group profile-field-wrap billing-phone"> <label
+                                                    for="elm_email" class="cm-profile-field hidden">E-mail</label>
+                                                <input type="text" id="elm_email" name="user_data[email]" size="32"
+                                                    value="" class="input-text cm-skip-avail-switch"
+                                                    placeholder="Email" required> </div>
+                                            <h3 style="display: block; margin: 10px 0 0; ">Phương thức nhận hàng</h3>
+                                            <p style=" color: #777; font-size: 13px; margin-bottom: 20px; ">Chọn phương
+                                                thức nhận hàng sẽ giúp bạn nhận được sản phẩm nhanh hơn</p>
+                                            <div class="clear phuong-thuc-nhan-hang">
+                                                <div class="tai_nha nhan-hang-block float-left center"> <label
+                                                        class="mt-radio active" data_id="shipping_home"> <span
+                                                            class="icon_shipping icon_shipping_home"></span>
+                                                        <p class="lbl pointer padding-8">Nhận tại nhà</p>
+                                                    </label> </div>
+                                                <div class="tai_cua_hang nhan-hang-block float-right center"> <label class="mt-radio"
+                                                        data_id="shipping_store"> <span
+                                                            class="icon_shipping icon_shipping_store"></span>
+                                                        <p class="lbl pointer padding-8">Nhận tại cửa hàng</p>
+                                                    </label> </div>
+                                            </div>
+                                            <div class="content_show_address">
+                                                <div id="shipping_home" class="mt-radio-content">
+                                                    <div class="nhan-hang-city float-left"> <label for="selCity"
+                                                            class="cm-required hidden ">Chọn Tỉnh Thành</label> 
+                                                        <select id="selCity" name="selCity" class="js-example-basic-single" required>
+                                                            <option value="">Chọn Tỉnh Thành</option>
+                                                            <option value="<%= nameCity %>"><%= nameCity %></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="nhan-hang-city float-right"> 
+                                                        <select id="selDistrict" name="selDistrict" class="js-example-basic-single" required>
+                                                            <option value="">Quận huyện</option>
+                                                        </select> 
+                                                    </div>
+                                                    <div class="control-group profile-field-wrap billing-address">
+                                                        <label for="elm_address"
+                                                            class="cm-profile-field cm-required hidden">Địa chỉ</label>
+                                                        <input type="text" id="elm_address" name="user_data[b_address]"
+                                                            size="32" value="" class="input-text cm-skip-avail-switch"
+                                                            placeholder="Địa chỉ (COD - trả tiền khi giao hàng)" required>
+                                                    </div>
+                                                    <p
+                                                        style=" font-weight: bold; color: #ED1C24; display: inline-block; border-bottom: 1px dashed; padding-bottom: 3px; margin-bottom: 7px; border-bottom-color: #ccc; ">
+                                                        Lưu ý giao hàng (C.O.D):</p>
+                                                    <p style=" padding: 3px 0; margin-left: 10px; "> * Giao hàng miễn
+                                                        phí: Cách cửa hàng dưới 3 km.</p>
+                                                    <p style=" padding: 3px 0; margin-left: 10px; "> * Phí giao hàng từ
+                                                        4 - 7 km: <strong>50.000đ </strong>và trên 7 km phí giao hàng
+                                                        mặc định là <strong>100.000đ</strong>.</p>
+                                                    <p style=" padding: 3px 0; margin-left: 10px; "> 
+                                                        * Đơn hàng sẽ được giao chậm nhất 1 ngày tính từ ngày đặt hàng thành công. 
+                                                        (Sẽ có tin nhắn / Email thông báo đến khách hàng)</p>
+                                                </div>
+                                                <div id="shipping_store" class="mt-radio-content hidden">
+                                                    <p><strong>Showroom:</strong>
+                                                        <input name="address_cua_hang" style="background:transparent;border:none;width:40%;" type="text" 
+                                                            value="227 Đ.Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM" readonly>
+                                                    </p>
+                                                </div>
+                                                <div class="control-group profile-field-wrap billing-address"> <label
+                                                        for="elm_notes" class="cm-profile-field hidden">Ghi chú</label>
+                                                    <textarea rows="5" type="text" id="elm_notes"
+                                                        name="user_data[notes]" size="32"
+                                                        class="input-text cm-skip-avail-switch"
+                                                        placeholder="Lưu ý của khách hàng"></textarea> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="statistic-list-wrap clear">
+                                    <div class="checkout-totals clearfix" id="checkout_totals">
+                                        <ul class="statistic-list">
+                                            <li class="statistic-list-subtotal">
+                                                <span class="checkout-item-title">Phí giao hàng:</span>
+                                                <input id="check_ship" name="check_ship" value="1" type="hidden" readonly>
+                                                <input id="ip_fee_ship" name="ip_fee_ship" value="" type="hidden" readonly>
+                                                <span class="fee_ship checkout-item-value">
+                                                    <span>0</span><sup style="font-size:smaller">₫</sup>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                        <ul class="statistic-list">
+                                            <li class="statistic-list-subtotal">
+                                                <span class="checkout-item-title">Tổng tiền:</span>
+                                                <span class="checkout-item-value total">
+                                                    <span class="total_last"><%= totalMoney.toLocaleString('it-IT') %></span><sup style="font-size:smaller">₫</sup>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                        <!--checkout_totals-->
+                                    </div>
+                                </div>
+                                <input id="tlocCart" name="cookieCart" value="<%= cookieCart %>" type="hidden" readonly>
+                                <div class="checkout-buttons check-from-thanhtoan"> 
+                                    <span class="button-submit"> 
+                                        <button name="dispatch[checkout.thanhtoan]" type="submit">Hoàn tất đặt hàng</button>
+                                    </span> 
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <% }; %>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('footer') -%>

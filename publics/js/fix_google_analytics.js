@@ -1,0 +1,1 @@
+(function(_,$){$.ceEvent('on','ce.history_load',function(url){if(typeof(ga)!='undefined'){ga('send','pageview',url.replace('!',''));}});}(Tygh,Tygh.$));

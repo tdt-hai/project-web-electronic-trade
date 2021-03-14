@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+
+<head>
+	<meta charset="utf-8">
+	<title>AE Mobile - AdminCP</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production-plugins.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-skins.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-rtl.min.css">
+	<link rel="shortcut icon" href="/images/admincp/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/images/admincp/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+	<link rel="apple-touch-icon" href="/images/admincp/sptouch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/images/admincp/touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/images/admincp/touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/images/admincp/touch-icon-ipad-retina.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-startup-image" href="/images/admincp/ipad-landscape.png"
+		media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+	<link rel="apple-touch-startup-image" href="/images/admincp/ipad-portrait.png"
+		media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+	<link rel="apple-touch-startup-image" href="/images/admincp/iphone.png"
+		media="screen and (max-device-width: 320px)">
+
+</head>
+
+<body class="animated fadeInDown">
+
+	<header id="header">
+
+		<div id="logo-group">
+			<span id="logo"> <img src="/images/admincp/logo.png" alt="SmartAdmin"> </span>
+		</div>
+
+		<span id="extr-page-header-space"> <a href="/" class="btn btn-danger">Về trang bán hàng</a> </span>
+
+	</header>
+
+	<div id="main" role="main">
+
+		<!-- MAIN CONTENT -->
+		<div id="content" class="container">
+
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<h1 class="txt-color-red login-header-big text-center">AE Mobile</h1>
+					<div class="well no-padding">
+						<form id="loginForm" method="POST" class="smart-form client-form">
+							<header>
+								Đăng Nhập
+							</header>
+							<fieldset>
+								<% if (error) { %>
+									<section>
+										<div class="alert alert-danger fade in">
+											<button class="close" data-dismiss="alert">
+												×
+											</button>
+											<i class="fa-fw fa fa-times"></i>
+											<strong>Lỗi!</strong>
+											<%= error %>
+										</div>
+									</section>
+									<% } %>
+										<section>
+											<label class="label">Tên đăng nhập</label>
+											<label class="input"> <i class="icon-append fa fa-user"></i>
+												<input type="text" name="username" required>
+												<b class="tooltip tooltip-top-right"><i
+														class="fa fa-user txt-color-teal"></i>
+													Vui lòng nhập tài khoản</b></label>
+										</section>
+
+										<section>
+											<label class="label">Mật khẩu</label>
+											<label class="input"> <i class="icon-append fa fa-lock"></i>
+												<input type="password" name="password" required>
+												<b class="tooltip tooltip-top-right"><i
+														class="fa fa-lock txt-color-teal"></i>
+													Vui lòng nhập mật khẩu của bạn</b> </label>
+											<div class="note">
+												<a href="user/forgotpassword">Quên mật khẩu?</a>
+											</div>
+										</section>
+
+										<section>
+											<label class="checkbox">
+												<input type="checkbox" name="remember" checked="">
+												<i></i>Giữ đăng nhập</label>
+										</section>
+							</fieldset>
+							<footer>
+								<button type="submit" class="btn btn-primary">
+									Đăng nhập
+								</button>
+							</footer>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--================================================== -->
+
+	<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+	<script src="/js/pace.min.js"></script>
+
+	<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script> if (!window.jQuery) { document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>'); } </script>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script> if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>'); } </script>
+
+	<!-- IMPORTANT: APP CONFIG -->
+	<script src="/js/app.config.js"></script>
+
+	<!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
+		<script src="/js/jquery.ui.touch-punch.min.js"></script> -->
+
+	<!-- BOOTSTRAP JS -->
+	<script src="/js/bootstrap.min.js"></script>
+
+	<!-- JQUERY VALIDATE -->
+	<script src="/js/jquery.validate.min.js"></script>
+
+	<!-- JQUERY MASKED INPUT -->
+	<script src="/js/jquery.maskedinput.min.js"></script>
+
+	<!--[if IE 8]>
+			
+			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+			
+		<![endif]-->
+
+	<!-- MAIN APP JS FILE -->
+	<script src="/js/app.min.js"></script>
+
+	<script type="text/javascript">
+		runAllForms();
+
+		$(function () {
+			// Validation
+			$("#login-form").validate({
+				// Rules for form validation
+				rules: {
+					email: {
+						required: true,
+						email: true
+					},
+					password: {
+						required: true,
+						minlength: 3,
+						maxlength: 20
+					}
+				},
+
+				// Messages for form validation
+				messages: {
+					email: {
+						required: 'Please enter your email address',
+						email: 'Please enter a VALID email address'
+					},
+					password: {
+						required: 'Please enter your password'
+					}
+				},
+
+				// Do not change code below
+				errorPlacement: function (error, element) {
+					error.insertAfter(element.parent());
+				}
+			});
+		});
+	</script>
+
+</body>
+
+</html>

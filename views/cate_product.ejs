@@ -1,0 +1,115 @@
+<%- include('header', { title: `${title + (filter_text ? ' ' + filter_text : '') }`, titleSub: `${type}` }); -%>
+    <div class="container content-grid">
+        <% if(!brand){ %>
+            <% if(!filter){ %> 
+            <div class="row">
+                <div class="span16 ">
+                    <div class=" home-banner-3">
+                        <div class="ad-container center">
+                            <a href="/dien-thoai/iphone-12">
+                                <img class="ty-pict cm-image" data-src="/images/promo/iphone-12-danh-muc.png"
+                                    alt="Home 3 - 5" title="Home 3 - 5" src="/images/promo/iphone-12-danh-muc.png"
+                                    width="1600" height="660">
+                            </a>
+                        </div>
+                        <div class="ad-container center"> <a href="/may-tinh-bang-samsung">
+                                <img class="ty-pict cm-image" data-src="/images/promo/galaxy-tab-a.jpg" alt="Home 3-4"
+                                    title="Home 3-4" src="/images/promo/galaxy-tab-a.jpg" width="1600" height="660">
+                            </a>
+                        </div>
+                        <div class="ad-container center">
+                            <a href="/dien-thoai-samsung">
+                                <img class="ty-pict cm-image" data-src="/images/promo/danh-muc-doi-note-20.jpg"
+                                    alt="Trade-in Lên Đời Note 20 Chỉ 6 Triệu" title="Trade-in Lên Đời Note 20 Chỉ 6 Triệu"
+                                    src="/images/promo/danh-muc-doi-note-20.jpg" width="1600" height="660">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %> 
+        <% } %> 
+        <div class="row">
+            <div class="span16 danh-muc-san-pham">
+                <%- include('cateMark') -%>
+                <% if(products.length > 0){ %>
+                    <div class="mainbox-container clearfix">
+                        <div class="mainbox-body">
+                            <% if (!filter) { %>
+                                <h1><%= title %> nổi bật nhất</h1>
+                            <% } %>
+                            <div id="category_products_11" class="<%= !filter ? 'category_view' : '' %>">
+                                <div class="grid_product_list_column clearfix " id="danhmuc">
+                                    <% products.forEach(function(product, index){ %>
+                                        <div class="product_list_column5" id="container">
+                                            <div class="grid-list__item ">
+                                                <div class="grid-list__image">
+                                                    <% if(product.isHangCongTy==true){ %>
+                                                        <span class="label_cty">Công ty</span>
+                                                        <% } %>
+                                                            <% if(product.isTraGop==true){ %>
+                                                                <label class="label_installment">Trả góp 0%</label>
+                                                                <% }else { %>
+                                                                    <span class="sticker_mau_4">Siêu giảm giá</span>
+                                                                    <% } %>
+                                                                        <a href="/<%= product.type %>/<%= product.path_url %>"
+                                                                            title="<%= product.name %>">
+                                                                            <img class="ty-pict cm-image fade-in-on-load"
+                                                                                alt="<%= product.name %>"
+                                                                                title="<%= product.name %>" 
+                                                                                src="/uploads/<%= product.extend_products[0].path_image %>"
+                                                                                width="180" height="180">
+                                                                        </a>
+                                                </div>
+                                                <div class="grid-list__item-name">
+                                                    <a href="/<%= product.type %>/<%= product.path_url %>"
+                                                        class="product-title"><%= product.name %>
+                                                    </a>
+                                                </div>
+                                                <div class="grid-list__price"> <span class="cm-reload price-update"
+                                                        id="price_update"> <input type="hidden"
+                                                            name="appearance[show_price_values]" value="1"> <input
+                                                            type="hidden" name="appearance[show_price]" value="1"> <span
+                                                            class="price" id="line_discounted_price"><span
+                                                                id="sec_discounted_price" class="price-num">
+                                                                <%= parseInt(product.price).toLocaleString('it-IT') %></span><span class="price-num"><sup style="font-size:smaller">₫</sup></span>
+                                                            </span>
+                                                    </span> <span class="cm-reload" id="old_price_update">
+                                                    </span> </div>
+                                            </div>
+
+                                        </div>
+                                    <% }); %>
+                                    <p class="clearfix" id="p_xoa"></p>
+                                    <% if (number_left > 0) { %> 
+                                        <a class="more_load_page ld-ext-right" id="load_more" onclick="this.classList.toggle('running')">Xem thêm <%= number_left + ' ' + title.toLowerCase() %>
+                                            <div class="ld ld-ring ld-spin"></div>
+                                        </a>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <ul class="homeproduct cate emptystate">
+                        <li>
+                            Không tìm thấy kết quả nào phù hợp!<br>
+                                <a href="/<%= type %>">Xem tất cả <%= title %></a>
+                        </li>
+                    </ul>
+                <% }; %>
+            </div>
+        </div>
+    </div>
+    <div class="plc">
+        <ul>
+            <li><i class="icGh"></i><span>Ship COD giao hàng tận nhà</span></li>
+            <li><i class="icTt"></i><span>Thanh toán linh hoạt: tiền mặt, visa/master, trả góp</span></li>
+            <li><i class="icTn"></i><span>Trải nghiệm sản phẩm tại nhà</span></li>
+            <li><i class="icLd"></i><span>Bao test 1 đổi 1 trong vòng 30 ngày</span></li>
+            <li><i class="icHt"></i><span>Hỗ trợ suốt thời gian sử dụng. Hotline: <a href="tel:0989898989">0989 89 89
+                        89</a></span></li>
+        </ul>
+    </div>
+    <script>let _sort_by,_sort_order,_page=0;$(document).on("click",".sort-by-popularity-desc",function(){$.ajax({type:"GET",url:"/<%= type %>/?<%= filter ? 'filter='+filter : '' %>&sort_by=popularity&sort_order=desc&clicked=true",dataType:"json",timeout:5e3,success:function(e){setTimeout(function(){$(".sort-by-popularity-desc").removeClass("running"),fetchData(e,!0,"<%= title %>"),_sort_by="popularity",_sort_order="desc",_page=0,$("#elm_sort_fields li a").removeClass("check"),$("#dropdown-item-common-desc").addClass("check"),window.history.pushState(null,null,"/<%= type %>/?<%= filter ? 'filter='+filter : '' %>&sort_by=popularity&sort_order=desc")},250)},statusCode:{404:function(){alert("Not found!")}}})}),$(document).on("click",".sort-by-price-desc",function(){$.ajax({type:"GET",url:"/<%= type %>/?<%= filter ? 'filter='+filter : '' %>&sort_by=price&sort_order=desc&clicked=true",dataType:"json",timeout:5e3,success:function(e){setTimeout(()=>{$(".sort-by-price-desc").removeClass("running"),fetchData(e,!0,"<%= title %>"),_sort_by="price",_sort_order="desc",_page=0,$("#elm_sort_fields li a").removeClass("check"),$("#dropdown-item-price-desc").addClass("check"),window.history.pushState(null,null,"/<%= type %>/?<%= filter ? 'filter='+filter : '' %>&sort_by=price&sort_order=desc")},250)},statusCode:{404:function(){alert("Not found!")}}})}),$(document).on("click",".sort-by-price-asc",function(){$.ajax({type:"GET",url:"/<%= type %>/?<%= filter ? 'filter='+filter : '' %>&sort_by=price&sort_order=asc&clicked=true",dataType:"json",timeout:5e3,success:function(e){setTimeout(()=>{$(".sort-by-price-asc").removeClass("running"),fetchData(e,!0,"<%= title %>"),_sort_by="price",_sort_order="asc",_page=0,$("#elm_sort_fields li a").removeClass("check"),$("#dropdown-item-price-asc").addClass("check"),window.history.pushState(null,null,"/<%= type %>/?<%= filter ? 'filter='+filter : '' %>&sort_by=price&sort_order=asc")},250)},statusCode:{404:function(){alert("Not found!")}}})}),$(document).on("click","#load_more",function(){_sort_by||_sort_order||(_sort_by=getParameterByName("sort_by"),_sort_order=getParameterByName("sort_order")),$.ajax({type:"GET",url:"/load-more-product",data:{page:_page,type:"<%= type %>",filter:"<%= filter %>",sort_by:_sort_by,sort_order:_sort_order},dataType:"json",timeout:5e3,success:function(e){$(".more_load_page").addClass("more_load_page_no"),setTimeout(()=>{_page+=1,$("#load_more").remove(),$("#p_xoa").remove(),fetchData(e,!1,"<%= title %>")},350)},statusCode:{404:function(){alert("Not found!")}}})});</script>
+<%- include('footer') -%>

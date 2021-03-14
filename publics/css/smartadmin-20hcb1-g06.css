@@ -1,0 +1,35 @@
+table td a {
+    font-weight: bold;
+    color: #a90329;
+}
+
+tr.strikeout {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXY2BgYPgPAAEEAQBwIGULAAAAAElFTkSuQmCC');
+    background-repeat: repeat-x;
+    background-position: 50% 50%;
+}
+    
+.edit-link {
+    right:10px;
+    position:absolute;
+    top:6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+    
+.icon-input {
+    padding-right:60px !important;
+}
+
+.float-right {
+    float: right!important;
+}
+
+.float-right .input input {
+    text-align: right!important;
+}
+
+span.required {
+    color: red;
+    margin-left: 5px;
+}
